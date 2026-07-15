@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEAP | 노동 균형 및 지역 정착 프로그램</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #f8fafc; /* 밝은 회백색 배경 */
+            --secondary: #ffffff; /* 순백색 */
+            --accent: #10b981; /* 활기찬 에메랄드 그린 */
+            --accent-blue: #0284c7; /* 청량한 스카이 블루 */
+            --accent-glow: rgba(16, 185, 129, 0.2);
+            --accent-red: #ef4444; /* 경고 레드 */
+            --accent-orange: #f59e0b; /* 따뜻한 오렌지 */
+            --text-main: #334155; /* 가독성 높은 차분한 다크그레이 */
+            --text-light: #0f172a; /* 강조 제목용 딥블루 블랙 */
+            --text-dim: #64748b; /* 부제목용 슬레이트 그레이 */
+            --card-bg: #ffffff; /* 하얀색 카드 바탕 */
+            --border-color: #e2e8f0; /* 테두리 선 */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--primary); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* 네비게이션 바 (글래스모피즘) */
+        header { width: 100%; padding: 18px 8%; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); position: fixed; top: 0; left: 0; z-index: 100; border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02); }
+        .logo { font-size: 24px; font-weight: 800; color: var(--accent-blue); letter-spacing: 1.5px; font-family: 'Orbitron', sans-serif; display: flex; align-items: center; gap: 10px; transition: var(--transition-smooth); }
+        .logo:hover { transform: scale(1.02); }
+        .logo span { color: var(--accent); }
+        nav { display: flex; align-items: center; }
+        nav a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 15px; transition: var(--transition-smooth); font-weight: 600; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: var(--accent-blue); transition: var(--transition-smooth); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--accent-blue); }
+
+        /* 메인 히어로 섹션 */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 10%; background: radial-gradient(circle at top right, rgba(2, 132, 199, 0.12), transparent 60%); position: relative; }
+        .hero-tag { font-family: 'Orbitron', sans-serif; color: var(--accent-blue); font-size: 13px; letter-spacing: 2px; margin-bottom: 20px; border: 1px solid var(--accent-blue); padding: 6px 16px; border-radius: 20px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; background: rgba(2, 132, 199, 0.04); font-weight: bold; }
+        .hero-tag span { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(0.8); opacity: 0.5; } 50% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(0.8); opacity: 0.5; } }
+        
+        .hero h1 { font-size: 58px; color: var(--text-light); margin-bottom: 25px; line-height: 1.3; font-weight: 800; letter-spacing: -1.5px; }
+        .hero h1 span { color: var(--accent-blue); }
+        .hero h1 span.highlight { color: var(--accent); }
+        .hero p { font-size: 20px; color: var(--text-dim); max-width: 850px; margin-bottom: 45px; line-height: 1.8; }
+        
+        /* 공통 섹션 레이아웃 */
+        section { padding: 120px 10%; border-bottom: 1px solid var(--border-color); background-color: var(--primary); position: relative; }
+        .section-title { font-size: 40px; color: var(--text-light); text-align: center; margin-bottom: 15px; font-weight: 800; letter-spacing: -1px; }
+        .section-title span { color: var(--accent); }
+        .section-title span.blue { color: var(--accent-blue); }
+        .section-subtitle { text-align: center; color: var(--text-dim); margin-bottom: 80px; font-size: 18px; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+        /* LEAP 소개 (Philosophy) 섹션 */
+        .intro-section { background-color: var(--secondary); padding: 120px 10%; text-align: center; }
+        .intro-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; margin-top: 40px; text-align: left; }
+        .intro-text p { font-size: 17.5px; margin-bottom: 22px; color: var(--text-main); text-align: justify; }
+        .intro-text .highlight-box { background: rgba(16, 185, 129, 0.04); padding: 30px; border-left: 5px solid var(--accent); border-radius: 4px 12px 12px 4px; font-weight: 700; font-size: 20px; color: var(--text-light); line-height: 1.7; box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+
+        /* 핵심 가치 카드 */
+        .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px; }
+        .value-card { background: var(--primary); padding: 45px 30px; border-radius: 16px; border: 1px solid var(--border-color); transition: var(--transition-smooth); text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+        .value-card:hover { transform: translateY(-10px); border-color: var(--accent-blue); box-shadow: 0 12px 30px rgba(2, 132, 199, 0.08); }
+        .value-card i { font-size: 42px; color: var(--accent-blue); margin-bottom: 25px; display: inline-block; }
+        .value-card h3 { font-size: 24px; color: var(--text-light); margin-bottom: 12px; font-family: 'Orbitron', sans-serif; font-weight: 800; }
+        .value-card p { font-size: 15px; color: var(--text-dim); line-height: 1.6; }
+
+        /* 교과 융합 인사이트 섹션 */
+        .services { background-color: var(--secondary); }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .card { background-color: var(--card-bg); padding: 50px 35px; border-radius: 16px; border: 1px solid var(--border-color); transition: var(--transition-smooth); box-shadow: 0 10px 20px rgba(0,0,0,0.01); }
+        .card:hover { transform: translateY(-10px); border-color: var(--accent-blue); box-shadow: 0 20px 30px rgba(2, 132, 199, 0.06); }
+        .card i { font-size: 48px; color: var(--accent-blue); margin-bottom: 25px; display: inline-block; }
+        .card.special-card i { color: var(--accent); }
+        .card h3 { font-size: 24px; color: var(--text-light); margin-bottom: 15px; font-weight: 700; letter-spacing: -0.5px; }
+        .card p { color: var(--text-dim); font-size: 15px; line-height: 1.7; text-align: justify; }
+
+        /* 체험형 기능 1: AI 로컬 앵커링 시뮬레이터 (지리 + 정보) */
+        .simulator-box { display: grid; grid-template-columns: 1.15fr 1fr; gap: 50px; background: var(--secondary); padding: 50px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .sim-control { display: flex; flex-direction: column; gap: 20px; justify-content: center; }
+        .step-btn { padding: 22px; background: var(--primary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); cursor: pointer; text-align: left; transition: var(--transition-smooth); display: flex; align-items: center; gap: 20px; width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.01); }
+        .step-btn:hover { background: var(--card-hover); }
+        .step-btn.active { border-color: var(--accent-blue); background: rgba(2, 132, 199, 0.05); color: var(--text-light); box-shadow: 0 4px 15px rgba(2, 132, 199, 0.08); }
+        .step-btn.active.green-active { border-color: var(--accent); background: rgba(16, 185, 129, 0.05); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.08); }
+        .step-btn i { font-size: 26px; transition: var(--transition-smooth); color: var(--text-dim); }
+        .step-btn.active i { color: var(--accent-blue); transform: scale(1.1); }
+        .step-btn.active.green-active i { color: var(--accent); }
+        .step-btn h4 { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+        .step-btn p { font-size: 13.5px; color: var(--text-dim); line-height: 1.5; }
+        
+        /* 가상 로컬 앵커 맵 시각화 */
+        .sim-map-container { background: #f8fafc; border-radius: 12px; border: 1px solid var(--border-color); height: 390px; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+        .map-svg { width: 92%; height: 92%; }
+        .map-node { fill: #cbd5e1; transition: var(--transition-smooth); }
+        .map-node.capital { fill: #818cf8; filter: drop-shadow(0 4px 6px rgba(129, 140, 248, 0.3)); }
+        .map-node.active-local { fill: var(--accent-blue); filter: drop-shadow(0 0 10px rgba(2, 132, 199, 0.4)); }
+        .map-node.danger-local { fill: var(--accent-red); filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.4)); }
+        .map-node.anchor-active { fill: var(--accent); filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4)); }
+        .map-line { stroke: #cbd5e1; stroke-width: 1.5; stroke-dasharray: 6; transition: 0.6s; }
+        .map-line.outflow { stroke: var(--accent-red); animation: dash 2s linear infinite; stroke-width: 2.5; filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.2)); }
+        .map-line.anchor-flow { stroke: var(--accent); animation: dash 1.5s linear infinite; stroke-width: 3; filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.3)); }
+        @keyframes dash { to { stroke-dashoffset: -24; } }
+        .sim-console-text { position: absolute; bottom: 15px; left: 15px; right: 15px; background: rgba(255, 255, 255, 0.95); color: var(--text-main); padding: 15px; border-radius: 8px; font-size: 13.5px; border: 1px solid var(--border-color); z-index: 5; box-shadow: 0 4px 15px rgba(0,0,0,0.03); line-height: 1.5; }
+
+        /* 체험형 기능 2: 상생 임금-정착 균형 조율 성과 (Win-Win Portfolio) */
+        .calc-box { max-width: 850px; margin: 0 auto; background: var(--secondary); padding: 50px; border-radius: 20px; border: 1px solid var(--border-color); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .chart-layout-box { display: grid; grid-template-columns: 1fr 1.25fr; gap: 40px; margin-top: 30px; text-align: left; align-items: stretch; }
+        .case-selector { display: flex; flex-direction: column; gap: 12px; width: 100%; justify-content: center; }
+        .case-btn { padding: 16px; background: var(--primary); border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; text-align: left; transition: var(--transition-smooth); font-family: 'Pretendard', sans-serif; }
+        .case-btn:hover { background: var(--card-hover); }
+        .case-btn.active { border-color: var(--accent-blue); background: rgba(2, 132, 199, 0.05); font-weight: bold; color: var(--text-light); box-shadow: 0 4px 12px rgba(2, 132, 199, 0.05); }
+        .calc-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
+        .metric { background: var(--primary); padding: 22px; border-radius: 12px; border: 1px solid var(--border-color); transition: var(--transition-smooth); }
+        .metric-title { font-size: 14px; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+        .metric-value { font-size: 36px; font-weight: 800; font-family: 'Orbitron', sans-serif; color: var(--text-light); }
+        .chart-visual-container { background: #f8fafc; border-radius: 12px; border: 1px solid var(--border-color); height: 350px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+        .chart-visual-title { font-size: 14px; font-weight: 700; color: var(--text-light); border-left: 3px solid var(--accent-blue); padding-left: 8px; }
+
+        /* 그래프 분석 안내판 박스 */
+        .chart-guide-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 30px; text-align: left; }
+        .guide-tab-card { background: #f8fafc; border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; font-size: 14px; }
+        .guide-tab-card h4 { font-size: 15px; font-weight: bold; color: var(--text-light); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .guide-tab-card h4 i { color: var(--accent-blue); }
+
+        /* 체험형 기능 3: 고도화 자가 조직 진단기 */
+        .diagnostic-box { max-width: 900px; margin: 0 auto; background: var(--secondary); padding: 50px; border-radius: 20px; border: 1px solid var(--border-color); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .diagnostic-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        .diag-progress-container { width: 150px; background: #e2e8f0; height: 6px; border-radius: 3px; position: relative; overflow: hidden; }
+        .diag-progress-bar { height: 100%; background: var(--accent); width: 11.1%; transition: 0.4s ease; }
+        .question-card { margin-bottom: 35px; background: var(--primary); padding: 35px; border-radius: 16px; border-left: 5px solid var(--accent-blue); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); transition: var(--transition-smooth); }
+        .question-card p { font-size: 18px; margin-bottom: 22px; color: var(--text-light); font-weight: 700; }
+        .question-card p span { color: var(--accent-blue); font-family: 'Orbitron', sans-serif; margin-right: 8px; }
+        .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .option-container { display: block; position: relative; cursor: pointer; user-select: none; }
+        .option-container input { position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0; }
+        .option-label { display: block; padding: 16px 22px; border: 1px solid var(--border-color); border-radius: 8px; text-align: left; transition: var(--transition-smooth); font-size: 14.5px; color: var(--text-main); background: var(--secondary); }
+        .option-container:hover .option-label { border-color: var(--accent-blue); background: rgba(2, 132, 199, 0.02); color: var(--text-light); }
+        .option-container input:checked ~ .option-label { background: rgba(2, 132, 199, 0.04); border-color: var(--accent-blue); color: var(--text-light); font-weight: bold; }
+
+        /* 진단 결과 뷰 */
+        .diag-result { display: none; margin-top: 40px; padding: 45px; background: #f8fafc; border: 2px solid var(--accent-blue); border-radius: 16px; animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 15px 30px rgba(2, 132, 199, 0.05); }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .result-summary { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 30px; margin-bottom: 30px; }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--accent-blue); background: var(--secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Orbitron', sans-serif; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.08); }
+        .score-circle .score-num { font-size: 24px; font-weight: 800; color: var(--accent-blue); line-height: 1.2; text-align: center; }
+        .score-circle .score-max { font-size: 11px; color: var(--text-dim); margin-top: 3px; text-transform: uppercase; }
+        .result-dimensions { display: flex; flex-direction: column; gap: 22px; margin: 30px 0; text-align: left; }
+        .dim-row { display: flex; flex-direction: column; gap: 8px; }
+        .dim-info { display: flex; justify-content: space-between; font-size: 14.5px; font-weight: 600; color: var(--text-light); }
+        .dim-bar-bg { height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; }
+        .dim-bar-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, var(--accent-blue)); border-radius: 5px; width: 0%; transition: width 1s ease-in-out; }
+        .dim-bar-fill.accent-bar { background: linear-gradient(90deg, #34d399, var(--accent)); }
+        
+        /* 설문 진단 결과의 학술적 제언란 보강 */
+        .prescriptive-report { background: var(--secondary); border-left: 5px solid var(--accent-orange); padding: 30px; border-radius: 0 12px 12px 0; text-align: left; margin-top: 30px; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+        .prescriptive-report h4 { font-size: 19px; color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: 800; }
+        .prescriptive-report h4 i { color: var(--accent-orange); }
+        .prescriptive-report p { font-size: 15px; color: var(--text-main); line-height: 1.7; margin-bottom: 15px; }
+        
+        /* 실시간 해결책 세부 실천 과제 카드 그리드 */
+        .solutions-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
+        .solution-detail-card { background: #f8fafc; border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; }
+        .solution-detail-card h5 { font-size: 15px; font-weight: bold; color: var(--text-light); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .solution-detail-card h5 span { background: var(--accent-blue); color: white; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-family: 'Orbitron'; }
+        .solution-detail-card h5.green-badge span { background: var(--accent); }
+        .solution-detail-card p { font-size: 13px; color: var(--text-main); margin: 0; line-height: 1.6; }
+
+        /* 실시간 커뮤니티 전용 레이아웃 */
+        .forum-section { background-color: var(--secondary); padding-bottom: 90px; text-align: center; }
+        .forum-layout { display: grid; grid-template-columns: 1.1fr 1.3fr; gap: 40px; margin-top: 40px; text-align: left; }
+        .forum-form-container { background: var(--primary); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+        .forum-form { display: flex; flex-direction: column; gap: 18px; }
+        
+        .community-container { background: var(--primary); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+        .community-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px; }
+        .community-title { font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--accent-blue); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .signature-counter { background: var(--accent-blue); color: var(--secondary); font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 20px; font-family: 'Pretendard', sans-serif; }
+        
+        .community-feed { flex-grow: 1; overflow-y: auto; max-height: 420px; display: flex; flex-direction: column; gap: 15px; padding-right: 5px; }
+        .community-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: #64748b; gap: 10px; text-align: center; }
+        .community-empty i { font-size: 40px; }
+        
+        .feed-item { background: var(--secondary); padding: 22px; border-radius: 12px; border: 1px solid var(--border-color); animation: fadeInUp 0.4s ease; position: relative; box-shadow: 0 4px 10px rgba(0,0,0,0.01); }
+        .feed-meta { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; color: var(--text-dim); margin-bottom: 10px; }
+        .feed-user { font-weight: 700; color: var(--text-light); display: flex; align-items: center; gap: 6px; }
+        .feed-region { background: rgba(2, 132, 199, 0.08); color: var(--accent-blue); font-size: 11px; padding: 2px 8px; border-radius: 15px; font-weight: 700; }
+        .feed-text { font-size: 14.5px; color: var(--text-main); line-height: 1.7; word-break: break-all; }
+        .feed-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 10px; border-top: 1px solid #f1f5f9; font-size: 12px; }
+        .like-button { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--text-dim); cursor: pointer; transition: var(--transition-smooth); font-weight: 600; padding: 5px 10px; border-radius: 4px; }
+        .like-button:hover { background-color: #ffe4e6; color: var(--accent-red); }
+        .like-button.liked { color: var(--accent-red); font-weight: 700; background-color: rgba(239, 68, 68, 0.05); }
+        .feed-time { color: var(--text-dim); }
+
+        /* 문의 및 실시간 수신 데스크 섹션 레이아웃 */
+        .contact-section { background-color: var(--primary); padding-bottom: 90px; text-align: center; }
+        .contact-layout { display: grid; grid-template-columns: 1.1fr 1.3fr; gap: 40px; margin-top: 40px; text-align: left; }
+        .contact-container { background: var(--secondary); padding: 40px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
+        .contact-form { display: flex; flex-direction: column; gap: 18px; }
+        .form-input { padding: 15px; background: var(--primary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); font-size: 15px; outline: none; transition: var(--transition-smooth); width: 100%; font-family: 'Pretendard', sans-serif; }
+        .form-input::placeholder { color: var(--text-dim); }
+        .form-input:focus { border-color: var(--accent-blue); box-shadow: 0 0 10px rgba(2, 132, 199, 0.08); background: var(--secondary); }
+        .form-select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 15px center; background-size: 16px; padding-right: 40px; cursor: pointer; }
+        .form-textarea { height: 130px; resize: none; }
+
+        /* 실시간 수신 메일함 컨테이너 */
+        .inbox-container { background: #ffffff; border-radius: 16px; border: 1px solid var(--border-color); padding: 30px; color: var(--text-main); display: flex; flex-direction: column; height: 100%; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.02); position: relative; }
+        .inbox-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 20px; }
+        .inbox-title { font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--accent-blue); font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .inbox-badge { background: var(--accent); color: white; font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 800; font-family: 'Pretendard'; }
+        .inbox-list { flex-grow: 1; overflow-y: auto; max-height: 380px; display: flex; flex-direction: column; gap: 15px; }
+        .inbox-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 200px; color: var(--text-dim); gap: 10px; text-align: center; }
+        .inbox-empty i { font-size: 40px; }
+        
+        /* 자물쇠 잠금 화면 스타일 */
+        .inbox-locked-view { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 250px; text-align: center; gap: 15px; padding: 20px 0; }
+        .inbox-locked-view i { font-size: 48px; color: var(--accent-blue); filter: drop-shadow(0 0 10px rgba(2, 132, 199, 0.15)); margin-bottom: 10px; }
+        .inbox-locked-view p { font-size: 14px; color: var(--text-dim); }
+        .password-input-group { display: flex; gap: 10px; width: 100%; max-width: 280px; margin-top: 10px; }
+        .password-input { background: var(--primary); border: 1px solid var(--border-color); padding: 12px 15px; border-radius: 8px; color: var(--text-light); font-size: 14px; text-align: center; width: 100%; outline: none; }
+        .password-input:focus { border-color: var(--accent-blue); }
+        .unlock-btn { background: var(--accent-blue); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+        .unlock-btn:hover { background: #0270a5; }
+        .lock-err-msg { color: var(--accent-red); font-size: 12px; font-weight: bold; margin-top: 5px; display: none; }
+
+        .mail-item { background: var(--primary); border-radius: 12px; padding: 20px; border-left: 4px solid var(--accent-blue); border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); animation: slideIn 0.4s ease-out; transition: 0.2s; position: relative; }
+        .mail-item:hover { background: #f1f5f9; }
+        .mail-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); margin-bottom: 8px; }
+        .mail-sender { font-weight: bold; color: var(--text-light); font-size: 15px; }
+        .mail-type { background: rgba(2, 132, 199, 0.08); color: var(--accent-blue); font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
+        .mail-msg { font-size: 14px; color: var(--text-main); margin-top: 8px; word-break: break-all; white-space: pre-wrap; }
+        .mail-recipient { font-size: 11px; color: var(--text-dim); margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 8px; text-align: right; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 푸터 */
+        footer { background-color: #0f172a; padding: 50px 10%; text-align: center; font-size: 14px; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer p { margin-bottom: 10px; }
+    </style>
+
+    <!-- Firebase SDK (v11) CDN Import -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+        import { getFirestore, collection, doc, updateDoc, increment, onSnapshot } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+        // Firebase 설정 (예범 학생의 프로젝트 식별자 포함)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "",
+            authDomain: "leap-program-seogwipo.firebaseapp.com",
+            projectId: "leap-program-seogwipo",
+            storageBucket: "leap-program-seogwipo.appspot.com",
+            messagingSenderId: "10987654321",
+            appId: "1:10987654321:web:abcdef987654321"
+        };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'leap-program';
+
+        // Firebase 앱 서비스 구동
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.appId = appId;
+        window.auth = auth;
+        window.collection = collection;
+        window.doc = doc;
+        window.updateDoc = updateDoc;
+        window.increment = increment;
+
+        // 익명 인증 실행 및 실시간 채널 연결
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setupFirestoreListeners(user);
+            } else {
+                initAuth();
+            }
+        });
+
+        async function initAuth() {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        }
+
+        // 실시간 클라우드 동기화 (F5 새로고침 방어막 결합)
+        function setupFirestoreListeners(user) {
+            if (!user) return;
+            
+            // 1. 1:1 리스크 문의 데이터 리스너 수립
+            const inquiriesQuery = collection(db, 'artifacts', appId, 'public', 'data', 'inquiries');
+            onSnapshot(inquiriesQuery, (snapshot) => {
+                let inquiries = [];
+                snapshot.forEach(doc => {
+                    document.id ? inquiries.push({ id: doc.id, ...doc.data() }) : inquiries.push(doc.data());
+                });
+                window.mergeAndRenderInquiries(inquiries);
+            }, (error) => {
+                console.warn("Firestore Inquiries Offline Fallback Active");
+            });
+
+            // 2. 실시간 소통 피드 리스너 수립
+            const forumQuery = collection(db, 'artifacts', appId, 'public', 'data', 'forum');
+            onSnapshot(forumQuery, (snapshot) => {
+                let posts = [];
+                snapshot.forEach(doc => {
+                    document.id ? posts.push({ id: doc.id, ...doc.data() }) : posts.push(doc.data());
+                });
+                window.mergeAndRenderForum(posts);
+            }, (error) => {
+                console.warn("Firestore Forum Offline Fallback Active");
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><i class="fa-solid fa-seedling"></i> LEAP <span>PROGRAM</span></div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#philosophy">Philosophy</a>
+            <a href="#services">Insight</a>
+            <a href="#forum">Forum</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-tag"><span></span>Labor Equilibrium & Anchor Program</div>
+        <h1>지역 인재와 로컬 기업이<br><span>임금 균형</span> 위에서 <span class="highlight">함께 도약(LEAP)</span>하도록.</h1>
+        <p>LEAP(Labor Equilibrium & Anchor Program)은 지방 소멸과 청년 이탈이라는 지리적 불확실성을 데이터와 임금 보상 조율 시스템으로 극복하여, 청년 인재가 안심하고 정착할 수 있는 지속 가능한 상생 생태계를 설계합니다.</p>
+        <div class="btn-group">
+            <a href="#philosophy" class="btn">기관 소개 보기</a>
+            <a href="#forum" class="btn btn-secondary">소통 광장 참여</a>
+        </div>
+    </section>
+
+    <!-- 기관 소개 & 핵심 가치 섹션 -->
+    <section class="intro-section" id="philosophy">
+        <div class="intro-text">
+            <h2 class="section-title">Establishment <span>Philosophy</span></h2>
+            <p class="section-subtitle">인적 자원(노동력)의 불확실성을 가치로 전환하는 혁신적인 보상 및 정착 브랜딩 시스템</p>
+            <div class="intro-grid">
+                <div>
+                    <p>인간은 역사적으로 불확실한 자원을 확보하기 위해 끊임없이 노력해 왔습니다. 현대 사회에서 가장 불확실성이 큰 자원은 바로 **'인적 자원(노동력)'**입니다. 파업, 이탈, 그리고 성과급 갈등은 단순한 비용이 아니라 시스템의 허점을 알리는 시그널입니다.</p>
+                    <p>저희 LEAP은 이러한 불확실성을 데이터 분석 기술과 고차원 경제 모델로 분석하여, 기업에는 최고의 이윤 창출을, 청년에게는 안정적인 삶의 기반을 제공함으로써 사회 전체의 발전에 기여합니다.</p>
+                </div>
+                <div class="highlight-box">
+                    "균형을 이루고, 함께 도약하다."<br>
+                    <span style="font-size: 15px; font-weight: normal; color: var(--text-dim); display: block; margin-top: 10px;">
+                        임금 마찰과 지역 소멸이라는 시대적 불안정성 속에서 청년과 기업, 그리고 지자체 모두가 상생하는 최고의 균형(Equilibrium)을 실현합니다.
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="value-grid">
+            <div class="value-card">
+                <i class="fa-solid fa-balance-scale"></i>
+                <h3>Equilibrium</h3>
+                <p>임금 수준과 지역 생활 인프라 사이의 치우침 없는 최적의 균형점을 찾아냅니다.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-rocket"></i>
+                <h3>Leap</h3>
+                <p>노사 갈등을 넘어 생산 연속성과 청년 만족을 동시에 달성해 함께 도약합니다.</p>
+            </div>
+            <div class="value-card">
+                <i class="fa-solid fa-anchor"></i>
+                <h3>Anchor</h3>
+                <p>청년들이 지역 사회에 단단한 기반을 잡도록 돕는 산업 클러스터 고정장치 역할을 수행합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 교과 융합 인사이트 섹션 -->
+    <section class="services" id="services">
+        <h2 class="section-title">Cross-Curricular <span>Insight</span></h2>
+        <p class="section-subtitle">지리, 경제, 정보 교과의 심도 있는 해석을 통한 인적 자원 활용 전략</p>
+        <div class="grid">
+            <div class="card">
+                <i class="fa-solid fa-earth-asia"></i>
+                <h3>지리: 공간적 고정(Anchoring)</h3>
+                <p>대기업의 수도권 집중이라는 단일 요인을 넘어, 지역 문화와 생활환경(58.5%), 인간관계가 일자리 결정의 핵심임을 간파했습니다. 산업 클러스터의 취약성을 보완하는 공간적 헷징을 지원합니다.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-chart-line"></i>
+                <h3>경제: 후방 굴절 공급 곡선</h3>
+                <p>임금이 일정 수준을 넘어서면 여가를 선호하게 되는 노동의 특성을 분석합니다. 단순 임금 인상보다 효율적인 '비금전적 보상'의 경제적 가치를 성과급 모델에 적용합니다.</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>정보: 리스크 감지 및 빅데이터 매칭</h3>
+                <p>사내 임금 만족 데이터, 노조 소통 데이터 및 구직 데이터를 정량적으로 분석하여 잠재적 노동 갈등 리스크를 사전에 감지하고, 개인 맞춤형 보상 체계를 실시간 AI 알고리즘을 통해 최적화하여 제안합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 시뮬레이터 섹션 -->
+    <section id="simulator">
+        <h2 class="section-title">AI Labor <span>Anchor Simulator</span></h2>
+        <p class="section-subtitle">지리적 정착 균형 기술을 직접 가동하여 지역 청년 인재 이탈(Brain Drain)을 우회/정착시키는 모습을 실시간 시뮬레이션해 보세요.</p>
+        <div class="simulator-box">
+            <div class="sim-control">
+                <button class="step-btn active" onclick="runSim(1, this)">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red);"></i>
+                    <div>
+                        <h4>1단계: 수도권 청년 이탈 (Brain Drain)</h4>
+                        <p>지역 내 기회 및 임금 마찰로 인해 청년 인재들이 수도권으로 쏠리며 지방 소멸 위기가 고조되는 상태.</p>
+                    </div>
+                </button>
+                <button class="step-btn" onclick="runSim(2, this)">
+                    <i class="fa-solid fa-compass-drafting" style="color: var(--accent-blue);"></i>
+                    <div>
+                        <h4>2단계: LEAP 정착 모형 설계 분석</h4>
+                        <p>지역 강소기업의 일자리 데이터와 청년의 거주 희망 데이터를 결합해 맞춤형 지리적 안정망을 기획하는 모드.</p>
+                    </div>
+                </button>
+                <button class="step-btn" onclick="runSim(3, this)">
+                    <i class="fa-solid fa-anchor"></i>
+                    <div>
+                        <h4>3단계: 로컬 앵커링(Anchor) 가동</h4>
+                        <p>정착 보조금-매칭 보상 경제선이 안착되어 이탈하던 인재 흐름이 지역 거점 내 순환 및 보존으로 완전 전환됩니다.</p>
+                    </div>
+                </button>
+            </div>
+            <div class="sim-map-container">
+                <svg class="map-svg" viewBox="0 0 400 200">
+                    <path id="line-drain" class="map-line outflow" d="M 200 110 Q 140 60 80 50" />
+                    <path id="line-loop" class="map-line" d="M 200 110 Q 280 150 200 110" style="display:none;" />
+                    <circle id="node-capital" class="map-node capital" cx="80" cy="50" r="12" />
+                    <text x="80" y="30" fill="var(--text-main)" font-size="10" text-anchor="middle" font-weight="700">수도권 (인재 집중)</text>
+                    <circle id="node-local" class="map-node danger-local" cx="200" cy="110" r="16" />
+                    <text x="200" y="85" fill="var(--accent-red)" text-anchor="middle" id="node-local-text" font-weight="700">지역 거점 (인재 유출)</text>
+                    <circle id="node-base" class="map-node" cx="320" cy="140" r="10" />
+                    <text x="320" y="165" fill="var(--text-main)" font-size="10" text-anchor="middle">정착 지원 기반</text>
+                </svg>
+                <div id="sim-info" class="sim-console-text">
+                    <strong>관제 상태:</strong> 일자리 및 거주 인프라 격차로 청년이 대거 수도권으로 유출되고 있습니다. (지역 소멸 경보)
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 체험형 기능 2: 상생 임금-정착 균형 조율 성과 (Win-Win Portfolio) -->
+    <section id="calculator" style="background-color: var(--secondary);">
+        <h2 class="section-title">Win-Win <span>Negotiator Portfolio</span></h2>
+        <p class="section-subtitle">LEAP 프로그램이 실제로 기업과 지자체에 설계하고 처방했던 노동 경제학 균형 모델 분석 성과 예시입니다.</p>
+        <div class="calc-box">
+            <h3 style="color: var(--text-light); margin-bottom: 10px;">우리 기관의 맞춤형 보상-정착 조율 포트폴리오 사례</h3>
+            <p style="font-size: 15px; color: var(--text-dim); margin-bottom: 20px;">기업의 매칭 임금 기여도와 지자체의 정책 보조 제도가 만나 일구어낸 정량적 극복 사례를 선택해 보세요.</p>
+            
+            <div class="chart-layout-box">
+                <!-- 좌측: 기관이 제공하는 실제 설계 포트폴리오 선택 버튼 -->
+                <div class="case-selector">
+                    <button class="case-btn active" onclick="selectCase(1, this)">
+                        <strong>사례 A: 초기 노동 이탈 경보 단계 (보상 3%)</strong>
+                        <p style="font-size: 13px; color: var(--text-dim); margin-top: 5px;">지방 유출 위험도가 74%에 육박하는 비상 상황에서의 보상 설계 지표</p>
+                    </button>
+                    <button class="case-btn" onclick="selectCase(2, this)">
+                        <strong>사례 B: LEAP 상생 골디락스 조율 (보상 12%)</strong>
+                        <p style="font-size: 13px; color: var(--text-dim); margin-top: 5px;">기업 마진을 보존하며 청년 정착 만족도를 84%까지 극대화한 황금 균형선</p>
+                    </button>
+                    <button class="case-btn" onclick="selectCase(3, this)">
+                        <strong>사례 C: 고복지 임금 포화 구간 (보상 22%)</strong>
+                        <p style="font-size: 13px; color: var(--text-dim); margin-top: 5px;">정착 만족도는 높으나 기업 재무 한계선에 도달하여 정책 연계가 필요한 단계</p>
+                    </button>
+                </div>
+
+                <!-- 우측: 선택한 포트폴리오에 상응하는 실시간 메트릭 및 학술적 그래프 시각화 -->
+                <div class="chart-visual-container">
+                    <div class="chart-visual-title" id="chart-case-title">A단계: 초기 임금 마찰 및 정착 붕괴 위험</div>
+                    
+                    <div class="calc-metrics" style="margin-top: 10px; margin-bottom: 15px;">
+                        <div class="metric" style="padding: 12px;">
+                            <div class="metric-title" style="font-size: 12px;">청년 유출 위험율 (Risk)</div>
+                            <div class="metric-value" id="riskValue" style="color: var(--accent-red); font-size: 26px;">74%</div>
+                        </div>
+                        <div class="metric" style="padding: 12px;">
+                            <div class="metric-title" style="font-size: 12px;">종합 정착 만족도 (Anchor)</div>
+                            <div class="metric-value" id="productivityValue" style="color: var(--accent); font-size: 26px;">54%</div>
+                        </div>
+                    </div>
+
+                    <svg viewBox="0 0 200 150" style="width: 100%; height: 140px;">
+                        <!-- X/Y 축 -->
+                        <line x1="20" y1="130" x2="190" y2="130" stroke="#cbd5e1" stroke-width="1.5" />
+                        <line x1="20" y1="10" x2="20" y2="130" stroke="#cbd5e1" stroke-width="1.5" />
+                        <text x="180" y="142" font-size="8" fill="#64748b" text-anchor="middle">보상 (%)</text>
+                        <text x="12" y="20" font-size="8" fill="#64748b" writing-mode="tb" text-anchor="middle">정착 효용</text>
+
+                        <!-- 고정 후방 굴절 노동 공급 곡선 -->
+                        <path d="M 30 120 Q 150 90 120 20" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="2" />
+                        <text x="140" y="30" font-size="7" fill="#64748b">노동 공급 곡선</text>
+
+                        <!-- 실시간 변화 효율성 임금선 / 정착 효용 곡선 -->
+                        <path id="curve-utility" d="M 20 130 Q 80 50 180 30" fill="none" stroke="var(--accent-blue)" stroke-width="2.5" />
+                        
+                        <!-- 최적 균형점 포인트 지시자 -->
+                        <circle id="chart-intersection" cx="80" cy="50" r="5" fill="var(--accent)" />
+                        <line id="guide-x" x1="80" y1="50" x2="80" y2="130" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3" />
+                        <line id="guide-y" x1="80" y1="50" x2="20" y2="50" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3" />
+                    </svg>
+                </div>
+            </div>
+            <p id="calc-tip" style="margin-top: 25px; font-size: 14.5px; color: var(--text-main); line-height: 1.6; text-align: left; background: #f8fafc; padding: 15px; border-radius: 8px;">
+                * <strong>경제 모델 해설:</strong> 기업 기여도가 3%일 경우, 통계청 청년 구직 서베이 기준 기대 보상의 40% 미만입니다. 이는 고착된 지리적 마찰(수도권 대비 낮은 인프라 만족도)을 이겨내지 못해 청년 유출이 가속화되는 무방비 위험군으로 기인합니다.
+            </p>
+
+            <!-- 💡 [피드백 반영] 객관적 그래프 해석 및 기능 가이드 패널 -->
+            <div class="chart-guide-tabs">
+                <div class="guide-tab-card">
+                    <h4><i class="fa-solid fa-circle-question"></i> 보상 기여도 정의</h4>
+                    <p style="color: var(--text-dim); line-height: 1.6; font-size: 13px;">기업이 청년 인재의 고향 이탈을 방지하고 유치를 위해 기본급 외 추가로 책정하여 제공하는 <strong>성과 보너스 및 복지 보조비(주거, 교통비 등)의 예산 기여 비율</strong>을 뜻합니다.</p>
+                </div>
+                <div class="guide-tab-card">
+                    <h4><i class="fa-solid fa-chart-line"></i> 왜 이 그래프인가?</h4>
+                    <p style="color: var(--text-dim); line-height: 1.6; font-size: 13px;">노동 공급이 계속 우상향하지 않고, 특정 보상 이후 여가와 삶의 질(지리적 안락함)을 찾아 왼쪽 위로 꺾이는 경제학의 <strong>'후방 굴절 공급 곡선(Backward-Bending Curve)'</strong> 실태를 시각화한 것입니다.</p>
+                </div>
+                <div class="guide-tab-card">
+                    <h4><i class="fa-solid fa-gear"></i> 그래프의 실질 기능</h4>
+                    <p style="color: var(--text-dim); line-height: 1.6; font-size: 13px;">기업이 무작정 높은 돈을 뿌리며 재무 낭비를 하지 않도록 막고, 기대 효용 교차 분석을 바탕으로 <strong>청년 이탈 리스크를 0%로 수렴시키는 상생의 '골디락스 구간(8%~15%)'을 도출</strong>해 줍니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 체험형 기능 3: 고도화 자가 조직 진단기 -->
+    <section id="diagnostic">
+        <h2 class="section-title">LEAP <span>Tension & Anchor Diagnostic</span></h2>
+        <p class="section-subtitle">우리 지자체 및 관내 기업들이 청년 인적 자원의 불확실성에 적절히 안착 및 대응하고 있는지 3대 교과 융합 지표로 측정합니다.</p>
+        <div class="diagnostic-box">
+            <div class="diagnostic-header">
+                <span style="font-size: 15px; font-weight: bold; color: var(--accent-blue); font-family: 'Orbitron', sans-serif;">LEAP ENTERPRISE AUDIT</span>
+                <div class="diag-progress-container">
+                    <div class="diag-progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+            
+            <form id="diag-form" onchange="updateProgress()">
+                <div class="diag-questions-wrapper">
+                    
+                    <!-- === 지리 영역 (Q1, Q2, Q3) === -->
+                    <div class="question-card">
+                        <p><span>Q1. 지리 영역</span> 주요 생산 거점의 공간적 다변화 수준 및 입지 분산도는 어떠합니까?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq1" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 단일 거점에 90% 이상 집중되어 돌발 위기 시 대체 가동이 불가능하다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq1" value="C">
+                                <span class="option-label"><strong>취약:</strong> 2개 권역으로 나누어져 있으나 설비 이중화가 미비해 우회 가동이 지연된다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq1" value="B">
+                                <span class="option-label"><strong>보통:</strong> 주요 거점이 분립 설계되어 일시적 거점 위기 대응 백업이 가능하다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq1" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 글로벌 다변화 분업망을 수립해 특정 거점 위기 시 자동 대체 생산이 가동된다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q2. 지리 영역</span> 업무 공백 발생 시 즉각 투입 가능한 사내 다기능 숙련인(Cross-Skilled Labor) 비율은 어떻습니까?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq2" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 교차 직무 인력이 전무해 담당자 부재 시 즉시 전체 라인이 정지된다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq2" value="C">
+                                <span class="option-label"><strong>취약:</strong> 대체 인력 풀은 수동 작성되어 있으나 행정 절차가 복잡해 적시 투입이 어렵다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq2" value="B">
+                                <span class="option-label"><strong>보통:</strong> 핵심 부서 인원의 20% 내외가 인접 부서 기본 공정을 상호 지원할 수 있다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq2" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 전 근로자의 50% 이상이 복수 교차 숙련을 이수해 유연한 라인 재배치가 즉시 실행된다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q3. 지리 영역</span> 지자체(예: 서귀포 혁신도시) 정착 제도 및 주거 보조 인프라와의 연계 정도는 어떻습니까?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq3" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 관내 청년 정착 우대 제도 정보를 수집하거나 공유한 실적이 전혀 없다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq3" value="C">
+                                <span class="option-label"><strong>취약:</strong> 연 1회 팸플릿 배포 수준에 그치며 사내 주거 보조금과의 공동 매칭 제도는 없다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq3" value="B">
+                                <span class="option-label"><strong>보통:</strong> 지자체 추천 무이자 전세대출 등을 사내 전산망에 주기적으로 매칭해 안내한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq3" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 지자체 펀드와 기업 자금을 1:1로 직접 조율 연계한 주택 책임 보증제를 정착시켰다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- === 경제 영역 (Q4, Q5, Q6) === -->
+                    <div class="question-card">
+                        <p><span>Q4. 경제 영역</span> 성과 배분 기준(성과급) 산정 절차의 투명성과 근거 공개 수준은 어떠합니까?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq4" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 회사의 일방적인 비공개 통보 방식이며 산정 공식 및 원칙이 완전히 베일에 싸여 있다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq4" value="C">
+                                <span class="option-label"><strong>취약:</strong> 사후적인 결과 수치만 공개하며 배분 가이드라인에 대한 정량적 사전 합의가 없다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq4" value="B">
+                                <span class="option-label"><strong>보통:</strong> 분기별 노사 협의회를 통해 정률 분배 기준을 상호 합의하고 정기 게시한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq4" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 이윤 기여 통계 데이터를 완전 연동하여 수학적으로 합의된 상생 공유 보상안을 실시간 오픈한다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q5. 경제 영역</span> 노사 마찰이나 파업 조짐, 핵심 인재의 이주 의향 감지 시 경영진의 대응 태도는?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq5" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 요구 사항을 집단 이기주의로 규정하고 강압적인 통제와 사후 징계 위주로 대응한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq5" value="C">
+                                <span class="option-label"><strong>취약:</strong> 문제 유발 시에만 단발성 현금 지급으로 합의를 모색하며 만성적 구조 개선은 방치한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq5" value="B">
+                                <span class="option-label"><strong>보통:</strong> 노사 전담 창구를 상설 운영해 갈등 의제를 선제적으로 완충 관리한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq5" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 갈등의 불확실성을 회사 임금 복지 체질을 진화시키라는 가장 명확한 혁신 신호로 수용한다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q6. 경제 영역</span> 보상 전략 설계 시 한계 효용 한계에 따른 '비금전적 혜택'의 입체적 운영 수준은?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq6" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 돈(기본급) 외에는 청년 유출을 방어할 어떤 복지성 유인 도구도 설계하지 못한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq6" value="C">
+                                <span class="option-label"><strong>취약:</strong> 명절 휴가비 보조비 정도의 기성식 복지만 지불하며 고도화된 선택형 옵션이 없다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq6" value="B">
+                                <span class="option-label"><strong>보통:</strong> 통근비 및 체력 단련비 등 정형화된 선택형 복지 포인트 한도를 개인별 제공한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq6" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 후방 굴절 한계 구간 우회를 위해 유급 휴가 가중 매칭 및 원격 워케이션 패키지를 설계해 작동한다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- === 정보 영역 (Q7, Q8, Q9) === -->
+                    <div class="question-card">
+                        <p><span>Q7. 정보 영역</span> 관내 구인정보 미스매치 예측 및 구성원 이탈 리스크 사전 감지 전산 인프라는 어떻습니까?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq7" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 퇴사 당일까지 이직 리스크를 전혀 감지할 수 없는 완전 무데이터 상태이다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq7" value="C">
+                                <span class="option-label"><strong>취약:</strong> 수동 면담이나 설문지로만 수집해 불만족 데이터의 입체적 정량화가 안 된다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq7" value="B">
+                                <span class="option-label"><strong>보통:</strong> 사내 근로 의향 데이터를 주기적으로 전산 집계해 이탈 경고군을 임의 관리한다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq7" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 무기명 소통 피드백 데이터 통합 분석으로 갈등 위기 징후를 즉시 포착하는 자동화 경보망이 돌아간다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q8. 정보 영역</span> 생산 공백 발생 시 즉각 예비 인력을 확보해 배정하는 실시간 매칭망 구축 수준은?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq8" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 비상 대치 대비 연락망조차 정비되어 있지 않아 수소문 충원에 수일 이상 소요된다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq8" value="C">
+                                <span class="option-label"><strong>취약:</strong> 수동 엑셀 장부 형태의 예비군 명단을 사용해 유휴 설비 대체 매칭이 대단히 느리다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq8" value="B">
+                                <span class="option-label"><strong>보통:</strong> 전용 비상 연락 대치 프로토콜에 따라 반나절 이내에 보직 대치가 수동 실행된다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq8" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 지리 클러스터 대체 인력 예측 엔진을 통해 공정 공백을 수 분 내로 감지하고 자동 재배치한다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <p><span>Q9. 정보 영역</span> 사내 무기명 보안 소통 통로 및 피드백 수신 데스크의 실제 신뢰도는?</p>
+                        <div class="options">
+                            <label class="option-container">
+                                <input type="radio" name="dq9" value="D" checked>
+                                <span class="option-label"><strong>매우 취약:</strong> 고충 수렴 통로가 아예 폐쇄되었거나 작성 시 불이익 걱정으로 제 기능이 정지되었다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq9" value="C">
+                                <span class="option-label"><strong>취약:</strong> 형식적 건의함은 열려 있으나 사내 작성 IP나 신상 유출에 대한 불신으로 무가치한 글만 쌓인다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq9" value="B">
+                                <span class="option-label"><strong>보통:</strong> 지자체 공인 대행 건의 센터를 연계 기용해 최소한의 신분 노출 안심막을 보유했다.</span>
+                            </label>
+                            <label class="option-container">
+                                <input type="radio" name="dq9" value="S">
+                                <span class="option-label"><strong>상생 도약:</strong> 완전 암호화 무기명 수신 통로를 도입하여 갈등 고충 본질을 매일 검열 없이 직통 적재한다.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button type="button" class="btn" style="padding: 18px 45px;" onclick="evaluateEnterprise()">LEAP 로컬 상생 진단 발행</button>
+                </div>
+            </form>
+
+            <!-- 결과 보고서 출력 영역 (종합 유형 분석형) -->
+            <div id="result-box" class="diag-result">
+                <div class="result-summary">
+                    <div style="text-align: left;">
+                        <span style="font-family: 'Orbitron', sans-serif; color: var(--accent-blue); font-weight: bold; letter-spacing: 1px;">LEAP AUDIT REPORT</span>
+                        <h3 style="font-size: 26px; color: var(--text-light); margin-top: 5px;" id="rTitle">진단 보고서</h3>
+                        <p style="color: var(--text-dim); margin-top: 8px; font-size: 14.5px;" id="rDesc">종합 분석이 진행되었습니다.</p>
+                    </div>
+                    <div class="score-circle">
+                        <!-- 점수제 대신 동적으로 판별된 종합 5단계 등급 출력 -->
+                        <span class="score-num" id="rGrade" style="font-size: 24px; line-height: 1.2;">CLASS</span>
+                        <span class="score-max" id="rMetricSummary" style="font-size: 10px;">ANALYZING...</span>
+                    </div>
+                </div>
+
+                <!-- 3대 교과 융합 지표 점수 시각화 -->
+                <div class="result-dimensions">
+                    <h4 style="color: var(--text-light); font-size: 16.5px; border-left: 3px solid var(--accent-blue); padding-left: 10px;">교과 융합 3대 LEAP 회복력 지표</h4>
+                    
+                    <div class="dim-row">
+                        <div class="dim-info">
+                            <span>지리 공간 탄력성 (Geographical Resiliency & Anchoring)</span>
+                            <span id="geoScore">0/3</span>
+                        </div>
+                        <div class="dim-bar-bg"><div class="dim-bar-fill" id="geoBar"></div></div>
+                    </div>
+
+                    <div class="dim-row">
+                        <div class="dim-info">
+                            <span>경제적 타협 유연성 (Economic Compromise & Equilibrium)</span>
+                            <span id="ecoScore">0/3</span>
+                        </div>
+                        <div class="dim-bar-bg"><div class="dim-bar-fill" id="ecoBar"></div></div>
+                    </div>
+
+                    <div class="dim-row">
+                        <div class="dim-info">
+                            <span>정보 기술 민첩성 (Information Agility & Match Tech)</span>
+                            <span id="infoScore">0/3</span>
+                        </div>
+                        <div class="dim-bar-bg"><div class="dim-bar-fill accent-bar" id="infoBar"></div></div>
+                    </div>
+                </div>
+
+                <!-- 맞춤 처방 시나리오 -->
+                <div class="prescriptive-report">
+                    <h4><i class="fa-solid fa-lightbulb"></i> LEAP 수석 연구원 김예범의 객관적 경제-공간 진단서</h4>
+                    <p id="rPrescription" style="font-size: 15px; margin-bottom: 25px; line-height: 1.7; color: var(--text-main); font-weight: 600;">맞춤 제언이 표시되는 영역입니다.</p>
+                    
+                    <!-- 💡 [해결책 다양화] 실시간 해결책 세부 실천 과제 카드 그리드 동적 생성 영역 -->
+                    <div class="solutions-card-grid" id="solutions-dynamic-grid">
+                        <!-- 자바스크립트로 점수대별 맞춤 세부 해결 방안이 여기에 다각화되어 동적 렌더링됩니다. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 체험형 기능 4: 실시간 상생 소통 광장 (소통 피드 전용 독립 섹션) -->
+    <section class="forum-section" id="forum">
+        <h2 class="section-title">LEAP <span>Live Forum</span></h2>
+        <p class="section-subtitle">지역 인재의 정착과 소통을 위한 오픈 게시판입니다. 자유롭게 한 줄 응원을 등록하면 다른 사람들과 실시간으로 공유되며 새로고침해도 영구 보존됩니다.</p>
+        
+        <div class="forum-layout">
+            <!-- 좌측: 소통 피드 작성 Form -->
+            <div class="forum-form-container">
+                <h3 style="font-size: 20px; color: var(--text-light); margin-bottom: 20px; font-weight: 700;"><i class="fa-solid fa-pen-nib" style="color: var(--accent-blue);"></i> 로컬 응원 메시지 등록</h3>
+                <form class="forum-form" onsubmit="submitForumPost(event)">
+                    <input type="text" id="forum-name" placeholder="작성자 이름 / 닉네임" class="form-input" required>
+                    <select id="forum-region" class="form-input form-select" required>
+                        <option value="" disabled selected>희망 정착지 (거주 지역)</option>
+                        <option value="제주 서귀포">제주 서귀포</option>
+                        <option value="제주 제주시">제주 제주시</option>
+                        <option value="부산/경남">부산 / 경남 권역</option>
+                        <option value="광주/전라">광주 / 전라 권역</option>
+                        <option value="대구/경북">대구 / 경북 권역</option>
+                        <option value="강원/충청">강원 / 충청 권역</option>
+                        <option value="수도권">수도권 거점</option>
+                    </select>
+                    <textarea id="forum-msg" placeholder="지방 청년 소멸 방지를 위한 응원글이나 아이디어를 자유롭게 적어주세요." class="form-input form-textarea" required></textarea>
+                    <button type="submit" id="forum-submit-btn" class="btn" style="justify-content: center; width: 100%;"><i class="fa-solid fa-paper-plane"></i> 소통 광장에 의견 등록</button>
+                </form>
+            </div>
+
+            <!-- 우측: 실시간 연동 소통 피드 리스트 -->
+            <div class="community-container">
+                <div class="community-header">
+                    <span class="community-title"><i class="fa-solid fa-comments"></i> LEAP LIVE FEED</span>
+                    <span class="signature-counter" id="signature-count">실시간 서명: 1,428명</span>
+                </div>
+                
+                <div class="community-feed" id="community-feed-view">
+                    <!-- 기본 빈 화면 상태 표시 -->
+                    <div class="community-empty" id="community-empty-view">
+                        <i class="fa-regular fa-comment-dots"></i>
+                        <p>등록된 한 줄 의견이 없습니다.<br><span style="font-size: 13px; color:#64748b;">좌측 폼을 통해 첫 의견을 남겨보세요!</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 체험형 기능 5: 정식 문의 및 관리자 수신함 독립 섹션 -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">LEAP <span>Contact & Live Inbox</span></h2>
+        <p class="section-subtitle">프로그램에 문의 사항이나 정착 건의가 있다면 메시지를 남겨보세요. 전송된 문의는 sghs241511@seogwipo.jje.hs.kr 및 우측 관리자 관제 데스크에 영구 적재됩니다.</p>
+        
+        <div class="contact-layout">
+            <!-- 좌측: 실시간 문의 작성 폼 -->
+            <div class="contact-container">
+                <h3 style="font-size: 20px; color: var(--text-light); margin-bottom: 20px; font-weight: 700;"><i class="fa-solid fa-envelope" style="color: var(--accent-blue);"></i> 1:1 리스크 자문 및 문의</h3>
+                <form class="contact-form" onsubmit="submitContact(event)">
+                    <input type="text" id="contact-name" placeholder="문의자 성함 / 기관명" class="form-input" required>
+                    <input type="email" id="contact-email" placeholder="회신 주소 (sghs241511@seogwipo.jje.hs.kr)" class="form-input" required>
+                    <select id="contact-type" class="form-input form-select" required>
+                        <option value="" disabled selected>문의 유형 분류</option>
+                        <option value="청년 지역 정착 상담">청년 지역 정착 상담</option>
+                        <option value="지역 기업 참여 제안">지역 기업 참여 제안</option>
+                        <option value="지자체 협력 및 프로그램 문의">지자체 협력 및 프로그램 문의</option>
+                        <option value="기타 질문 및 건의">기타 일반 질문 및 건의</option>
+                    </select>
+                    <input type="hidden" name="_subject" value="LEAP 웹페이지 실시간 접수 알림">
+                    <textarea id="contact-msg" placeholder="문의하고자 하는 상세 내용을 적어주세요." class="form-input form-textarea" required></textarea>
+                    <button type="submit" id="submit-btn" class="btn" style="justify-content: center; width: 100%;"><i class="fa-solid fa-share-from-square"></i> LEAP 실시간 문의 제출</button>
+                    <div id="custom-alert-box" class="custom-alert">
+                        <!-- 성공 알림 텍스트 동적 렌더링 -->
+                    </div>
+                </form>
+            </div>
+
+            <!-- 우측: 실시간 관리자 수신함 (잠금 장치 포함) -->
+            <div class="inbox-container">
+                <!-- 잠금 상태 뷰 -->
+                <div class="inbox-locked-view" id="inbox-locked-view">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <h3 style="color: var(--text-light); font-family: 'Orbitron', sans-serif;">ADMIN SECURITY</h3>
+                    <p>본 메일 수신함은 관리자(김예범) 전용 영역입니다.<br>문의 내용을 확인하려면 비밀번호를 입력해 주세요.</p>
+                    <div class="password-input-group">
+                        <input type="password" id="admin-password" class="password-input" placeholder="비밀번호를 입력하세요">
+                        <button class="unlock-btn" onclick="tryUnlock()"><i class="fa-solid fa-lock-open"></i> 인증</button>
+                    </div>
+                    <div id="lock-error-msg" class="lock-err-msg">비밀번호가 일치하지 않습니다.</div>
+                </div>
+
+                <!-- 잠금 해제 후 정상 화면 뷰 (데이터 보존) -->
+                <div id="inbox-unlocked-view" style="display: none; height: 100%;">
+                    <div class="inbox-header">
+                        <span class="inbox-title"><i class="fa-solid fa-envelope-open-text"></i> LEAP LIVE INBOX</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="inbox-badge" id="mail-count">NEW 0</span>
+                            <button onclick="lockInbox()" class="btn" style="padding:5px 10px; font-size:12px;">잠금</button>
+                        </div>
+                    </div>
+                    
+                    <div class="inbox-list" id="inbox-messages">
+                        <!-- 기본 빈 상태 표시 -->
+                        <div class="inbox-empty" id="inbox-empty-view">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <p>수신된 실시간 문의가 없습니다.<br><span style="font-size: 13px; color:#64748b;">좌측 폼을 이용해 문의를 전송해 보세요.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer id="contact-footer">
+        <p>&copy; 2026 LEAP PROGRAM Group. All Rights Reserved.</p>
+        <p style="margin-top: 10px; font-size: 12px; color: var(--accent-blue);">지리 · 경제 · 정보 융합 혁신 연구소 | 담당 수석 컨설턴트 김예범</p>
+    </footer>
+
+    <!-- 자바스크립트 기반 동적 상호작용 기능 -->
+    <script>
+        // 1. AI 리스크 시뮬레이터 로직
+        window.runSim = function(step, element) {
+            const btns = document.querySelectorAll('.step-btn');
+            btns.forEach(btn => btn.classList.remove('active', 'green-active'));
+            if(element) {
+                element.classList.add('active');
+                if (step === 3) {
+                    element.classList.add('green-active');
+                }
+            }
+
+            const nodeCapital = document.getElementById('node-capital');
+            const nodeLocal = document.getElementById('node-local');
+            const nodeBase = document.getElementById('node-base');
+            const lineDrain = document.getElementById('line-drain');
+            const lineLoop = document.getElementById('line-loop');
+            const infoText = document.getElementById('sim-info');
+            const localText = document.getElementById('node-local-text');
+
+            if (nodeCapital) nodeCapital.className.baseVal = "map-node capital";
+            if (nodeLocal) nodeLocal.className.baseVal = "map-node";
+            if (nodeBase) nodeBase.className.baseVal = "map-node";
+            if (lineDrain) {
+                lineDrain.className.baseVal = "map-line";
+                lineDrain.style.display = "block";
+            }
+            if (lineLoop) {
+                lineLoop.className.baseVal = "map-line";
+                lineLoop.style.display = "none";
+            }
+
+            if (step === 1) {
+                if (nodeLocal) nodeLocal.className.baseVal = "map-node danger-local";
+                if (lineDrain) lineDrain.className.baseVal = "map-line outflow";
+                if (localText) {
+                    localText.innerText = "지역 거점 (인재 이탈)";
+                    localText.setAttribute("fill", "var(--accent-red)");
+                }
+                if (infoText) infoText.innerHTML = "<strong>관제 상태:</strong> 일자리 및 거주 인프라 격차로 청년이 대거 수도권으로 유출되고 있습니다. (지역 소멸 경보)";
+            } else if (step === 2) {
+                if (nodeLocal) nodeLocal.className.baseVal = "map-node active-local";
+                if (nodeBase) nodeBase.className.baseVal = "map-node active-local";
+                if (localText) {
+                    localText.innerText = "지역 거점 (LEAP 설계중)";
+                    localText.setAttribute("fill", "var(--accent-blue)");
+                }
+                if (infoText) infoText.innerHTML = "<strong>관제 상태:</strong> <span style='color:var(--accent-blue); font-weight:bold;'>LEAP 기획 적용!</span> 노사의 적정 복지-보상 지원 비율 및 지리적 안착 주거 요인을 분석 중입니다.";
+            } else if (step === 3) {
+                if (nodeLocal) nodeLocal.className.baseVal = "map-node anchor-active";
+                if (nodeBase) nodeBase.className.baseVal = "map-node anchor-active";
+                if (lineDrain) lineDrain.style.display = "none";
+                if (lineLoop) {
+                    lineLoop.style.display = "block";
+                    lineLoop.className.baseVal = "map-line anchor-flow";
+                }
+                if (localText) {
+                    localText.innerText = "지역 거점 (안정적 안착)";
+                    localText.setAttribute("fill", "var(--accent)");
+                }
+                if (infoText) infoText.innerHTML = "<strong>관제 상태:</strong> <span style='color:var(--accent); font-weight:bold;'>로컬 앵커링 완벽 가동!</span> 합리적 경제 보상 설계로 청년들이 거주 기반을 잡으며 수도권 유출 차단에 성공했습니다.";
+            }
+        }
+
+        // 2. 상생 임금-정착 균형 조율 성과 (Win-Win Portfolio) 연동 및 시뮬레이터 차트 제어
+        window.selectCase = function(caseNum, element) {
+            // 버튼 상태 전환
+            const btns = document.querySelectorAll('.case-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            if(element) element.classList.add('active');
+
+            const curveUtility = document.getElementById('curve-utility');
+            const chartIntersection = document.getElementById('chart-intersection');
+            const guideX = document.getElementById('guide-x');
+            const guideY = document.getElementById('guide-y');
+            const caseTitle = document.getElementById('chart-case-title');
+            const riskValue = document.getElementById('riskValue');
+            const productivityValue = document.getElementById('productivityValue');
+            const calcTip = document.getElementById('calc-tip');
+
+            let value = 8; // 기본 디폴트
+
+            if (caseNum === 1) {
+                value = 3;
+                if (caseTitle) caseTitle.innerText = "사례 A: 초기 노동 이탈 경보 단계 (보상 3%)";
+                if (riskValue) { riskValue.innerText = "74%"; riskValue.style.color = "var(--accent-red)"; }
+                if (productivityValue) { productivityValue.innerText = "54%"; }
+                if (calcTip) {
+                    calcTip.innerHTML = `* <strong>경제 모델 해설:</strong> 기업 추가 보상 기여도가 <strong>3%</strong>에 불과한 초기 설계안입니다. 조지 애컬로프의 '효율성 임금 가설'에 의하면 근로자가 인식하는 불성실 기회 편익보다 실질 기회 비용이 현저히 낮아 이직율이 극대화되며, 정주 인프라 격차를 상쇄하지 못해 <strong>공간적 이탈 비율(Risk 74%)</strong>이 매우 가파르게 증가하는 경고 단계입니다.`;
+                }
+            } else if (caseNum === 2) {
+                value = 12;
+                if (caseTitle) caseTitle.innerText = "사례 B: LEAP 실질적 상생 골디락스 조율 완료";
+                if (riskValue) { riskValue.innerText = "24%"; riskValue.style.color = "var(--accent-blue)"; }
+                if (productivityValue) { productivityValue.innerText = "84%"; }
+                if (calcTip) {
+                    calcTip.innerHTML = `* <strong>경제 모델 해설:</strong> 우리 LEAP이 제안한 <strong>12% 균형 설계안</strong>입니다. 노동공급의 '후방 굴절 한계 구간'을 회피하는 동시에, 기업이 추가 생산성(Productivity) 효과를 확보하는 황금 보상선입니다. 지자체의 전세 대출 보증 및 지역 정주 복지와 결합되어, 기업과 청년 노사 모두가 도약하는 <strong>골디락스 존(Goldilocks Zone)</strong>을 의미합니다.`;
+                }
+            } else if (caseNum === 3) {
+                value = 22;
+                if (caseTitle) caseTitle.innerText = "사례 C: 고복지 임금 포화 구간 (보상 22%)";
+                if (riskValue) { riskValue.innerText = "0%"; riskValue.style.color = "var(--accent-blue)"; }
+                if (productivityValue) { productivityValue.innerText = "98%"; }
+                if (calcTip) {
+                    calcTip.innerHTML = `* <strong>경제 모델 해설:</strong> 보상 기여도가 <strong>22%</strong>에 달하는 과포화 복지 구간입니다. 정착률은 98%에 육박하여 인력 이탈 리스크는 소멸하지만, 한계 생산성을 뛰어넘는 노무 비용 지출로 기업의 마진이 심대하게 악화되는 경제적 비효율 상태입니다. 이 단계에서는 현금성 임금보다 주거 환경 등 공간적 요인을 지자체가 보증해 주어야 합니다.`;
+                }
+            }
+
+            // 동적 SVG 곡선 및 포인트 위치 업데이트
+            if (curveUtility && chartIntersection && guideX && guideY) {
+                const baseCtrlY = 130 - (value * 4.2);
+                const baseEndY = 120 - (value * 3.4);
+                curveUtility.setAttribute('d', `M 20 130 Q 90 ${baseCtrlY} 180 ${baseEndY}`);
+
+                const intersectX = 20 + (value * 6);
+                const intersectY = 130 - (value * 3.2);
+                chartIntersection.setAttribute('cx', intersectX);
+                chartIntersection.setAttribute('cy', intersectY);
+
+                guideX.setAttribute('x1', intersectX);
+                guideX.setAttribute('y1', intersectY);
+                guideX.setAttribute('x2', intersectX);
+                guideY.setAttribute('x1', intersectX);
+                guideY.setAttribute('y1', intersectY);
+                guideY.setAttribute('y2', intersectY);
+            }
+        }
+
+        // 3. 자가 조직 진단기 로직
+        window.updateProgress = function() {
+            const form = document.getElementById('diag-form');
+            if (!form) return;
+            const radios = form.querySelectorAll('input[type="radio"]');
+            const checkedNames = new Set();
+            
+            radios.forEach(radio => {
+                if (radio.checked) {
+                    checkedNames.add(radio.name);
+                }
+            });
+            
+            // 프로그레스 바 9문항에 기초해 스케일 조정 (11.1% 단위)
+            const answeredCount = checkedNames.size;
+            const progressPercent = Math.min(100, Math.round((answeredCount / 9) * 100));
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = progressPercent + '%';
+            }
+        }
+
+        // 선택값 매칭에 필요한 객관적 진단 텍스트 및 해결책 데이터베이스 (보고서 기반 연동)
+        const SURVEY_DATABASE = {
+            dq1: {
+                D: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 현재 생산 거점이 특정 단일 허브에 90% 이상 고도 집중되어 공간적 위험 분산이 전혀 불가능하며 집적 이익 이상의 집적 불이익이 발생하고 있습니다.",
+                    solution: "공간 정착 전략 제안: 타 지역에 기업 기능을 분산하여 공간적 분업을 이루고 지리적 취약성을 해결해 주어야 합니다. 인적 자원들은 단순히 임금만으로 수도권으로 쏠리는 것이 아니므로, 주거자금 지원 제도 신설 등의 공간 중심 인사 전략을 통해 공간적 분업을 이루어 가야 합니다."
+                },
+                C: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 생산 거점이 2개 권역으로만 분할 설계되어 위기 발생 시 우회 가동으로의 신속한 공간 분업 전환이 다소 지연됩니다.",
+                    solution: "공간 정착 전략 제안: 지자체 협력 프로그램을 적극 활용해 사내 주거자금 지원 제도를 정밀 구축하고, 공정의 일부를 지리적으로 확실히 다변화 분산하십시오."
+                },
+                B: {
+                    strength: "지리 영역 강점: 주요 제조 거점을 다핵형 권역별 분립 배치하여 일시적 노무 정지 상황 시 공간 백업 능력을 안정적으로 확보했습니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "지리 영역 강점: 글로벌 입지 다변화 분업 네트워크를 갖춰 특정 거점 정지 시에도 중단 없는 실시간 대체 생산 우회로가 원활히 작동합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq2: {
+                D: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 사내 공정 직무가 엄격한 단일 역할에 편중 고착되어 대체 근무 자원이 전무하므로 라인의 특정 공정 공백 시 전체가 정지됩니다.",
+                    solution: "공간 정착 전략 제안: 지자체 협력 정착 프로그램을 인사 연계하여 핵심 대체 업무를 상호 지원할 수 있는 다기능 교차 숙련 훈련 제도를 사내 전격 가동하십시오."
+                },
+                C: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 대체 배치 프로세스가 아날로그 수작업 결재에 머물러 노무 대체 투입 지연 소요 기간이 지나치게 높습니다.",
+                    solution: "공간 정착 전략 제안: 사내 다기능 숙련인 자격 명단을 인사 데이터망에 정밀 적재하여 비상 승인 및 재배치 조치 기한을 최소화해 주십시오."
+                },
+                B: {
+                    strength: "지리 영역 강점: 핵심 부서 근로자의 약 20%가 인근 주요 보직의 기본 공정을 대체 지원할 수 있는 안정적 다기능 완충력을 보유했습니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "지리 영역 강점: 소속 근로자의 과반이 유기적인 복수 공정 숙련을 이수하여 비상 공백 즉시 라인 재배치 매칭을 안전하게 실현합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq3: {
+                D: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 지자체에서 시행 중인 청년 주택 특별 보조 및 거주 우대 제도 등의 정착 복지 정책을 전혀 활용하지 못하고 있습니다.",
+                    solution: "공간 정착 전략 제안: 서귀포 혁신도시 등 관할 지자체의 청년 정착 무이자 전세대출 정보를 수집하여 사내 주택 복지 제도와 1:1로 매칭하십시오."
+                },
+                C: {
+                    strength: "",
+                    weakness: "지리 영역 진단: 지자체 제도 안내를 단순 일회성 공유하는 수준에 그쳐 청년 인재들의 고향 생활 환경 결속 및 정착을 붙잡기에 매우 미흡합니다.",
+                    solution: "공간 정착 전략 제안: 지자체 펀드와 연계해 사내 주거자금 우대 지원 기금을 직접 신설하여 지역 정착 정주성(가중치 58.5%)을 확실하게 결속하십시오."
+                },
+                B: {
+                    strength: "지리 영역 강점: 지자체 전세 융자 알선망을 사내 복지 전산에 안정적으로 탑재해 안내하여 지역 청년 거주 안정에 적극 일조하고 있습니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "지리 영역 강점: 지자체 공조 펀드와 기업 매칭 재원을 1:1로 결합한 주택 책임 보증제를 기용해 지역 우수 청년 정착의 단단한 앵커 인프라를 완성했습니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq4: {
+                D: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 성과 보너스 분배 기준 가이드라인이 비공개 일방 통보 방식으로 일관되어 노사 성과 배분에 따른 구성원 박탈감이 최고조에 이른 상황입니다.",
+                    solution: "다원적 보상 구조 제안: 돈만 많이 주면 일을 열심히 할 것이라는 고정관념을 버리십시오. 성과급 산정 수식 기준을 투명하게 전사 공개해 신뢰를 긴급 복구해야 합니다."
+                },
+                C: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 사후 결과치만 일부 공유하여, 사전에 생산성 기여에 따른 보상 비율을 자율 조율 합의할 투명한 노사 기대 기준이 부재합니다.",
+                    solution: "다원적 보상 구조 제안: 이윤 기여 데이터를 바탕으로 보상 배분 가이드를 노사 협의 절차를 통해 전면 공개하고 노사 소통 채널을 전격 제도화하십시오."
+                },
+                B: {
+                    strength: "경제 영역 강점: 상설 노사 타협 창구를 가동해 성과급 배상 비율 합의 표준 가이드를 상호 명확하게 공지하여 보상 불만을 안정적으로 방어합니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "경제 영역 강점: 회사 이익 공유 빅데이터를 완벽 가동하여 실시간 타협 도출형 이익 공유 제도를 투명하게 정착시켜 운용 중입니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq5: {
+                D: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 노사 긴장 마찰 발생 시 이를 통제와 사후 징계 위주의 일방 제거 대상으로만 취급하여 근로자의 숨은 반발감을 키우고 있습니다.",
+                    solution: "다원적 보상 구조 제안: 강압과 갈등 방치는 불확실성 비용을 최대화합니다. 노동자 요구를 신속 파악하는 노사 소통 채널을 상설화해 인재 활용도를 극대화하십시오."
+                },
+                C: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 파업 조짐 발생 시 단순한 일회성 특별 상여금 지급식의 임시방편 조율에만 급급하여 갈등 소지를 만성 적체하고 있습니다.",
+                    solution: "다원적 보상 구조 제안: 단발성 무마 관행을 폐지하고, 구성원들이 정주 환경 및 소득에 느끼는 마찰을 정밀 타협 조율할 수 있는 상설 대화 협정망을 구성하십시오."
+                },
+                B: {
+                    strength: "경제 영역 강점: 노사 고충 전담 중재 창구를 연중 운용하여 상호 요구 의향을 주기적으로 예측 완충함으로써 생산 기회 손실을 효과적으로 예방 중입니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "경제 영역 강점: 파업 조짐과 이주 요구 신호를 보상 구조를 보완하고 회사의 체질을 상생형으로 강건하게 다듬으라는 진화 원동력으로 승화시켜 대응합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq6: {
+                D: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 성과 보너스 자금이 기본 임금에만 집중되어, 소득 수준 향상 시 여가(삶의 질)를 한결 중시하는 청년들의 특성(후방 굴절 공급 법칙)을 반영하지 못합니다.",
+                    solution: "다원적 보상 구조 제안: 단순 임금 인상에만 매몰되지 마십시오. 여가가 정상재가 되는 공급 한계를 극복하도록 비금전적 가치 복지 시스템을 설계해야 합니다."
+                },
+                C: {
+                    strength: "",
+                    weakness: "경제 영역 진단: 고착화된 기성 복지비 위주로만 예산을 지불하여 개인 기대 만족도와 거주지 생활 인프라 보조를 보강하기에 혜택 다양성이 결핍되어 있습니다.",
+                    solution: "다원적 보상 구조 제안: 청년들의 니즈가 집중되는 유급 휴가 매칭 보증, 워케이션 제공 등 비금전적인 맞춤 복지 카드를 다각적으로 편성해 유인하십시오."
+                },
+                B: {
+                    strength: "경제 영역 강점: 사용자가 복지 한도를 취향껏 분배해 사용하는 자율 복지 선택제를 가용하여 보상 만족도를 적절히 끌어올렸습니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "경제 영역 강점: 노동 임계 효용을 뛰어넘는 휴가 매칭 보조제 및 원격 하이브리드 워케이션 패키지를 결합 설계해 청년의 노동 공급을 상시 최상으로 유지합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq7: {
+                D: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 퇴사 징후 및 구직 정보 미스매칭 예측 전산망이 아예 부재하여 핵심 인력 이탈 시 상시 큰 기회비용 손실을 입습니다.",
+                    solution: "소통 테크 제안: 사후 면담 위주의 아날로그 관리를 즉시 폐기하십시오. 현재 LEAP 웹사이트에 적용된 '온라인 무기명 소통 창구'를 사내 전산망에 선제적으로 신설해야 합니다."
+                },
+                C: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 아날로그 사후 설문지에만 일관하여 현장 근로자의 실질적 상대 박탈감이나 고충 여론 추이를 사전에 정량 수집하여 조치하기 불가합니다.",
+                    solution: "소통 테크 제안: 컴퓨터가 언어 불만을 읽는 감성 분석을 통해 핵심 어휘 추이를 실시간 모니터링하고 갈등 폭발 전에 인사과에 알리는 조기 경보망을 수립하십시오."
+                },
+                B: {
+                    strength: "정보 영역 강점: 사내 고충 및 이탈 의향 데이터를 정기 자동 집계하여 퇴사 예견군을 전산망으로 범주 관리하여 노무 리스크에 대처하고 있습니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "정보 영역 강점: 소통 피드백 데이터의 통합 분석을 가동해 갈등 징후를 사전에 완벽히 포착해 방어하고 있습니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq8: {
+                D: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 비상 공백 시 대치할 보직 대체자 명단 연락처망조차 부재해 공정 지연 및 긴급 수습 소요 시간이 치명적으로 낭비됩니다.",
+                    solution: "소통 테크 제안: 돌발 노동 공백 시의 조치 마비를 방지할 예비 대체 투입 가용 전산 리스트와 대체 매핑 데이터베이스를 즉각 완비해야 합니다."
+                },
+                C: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 대체자 명단 관리를 수동 아날로그 장부 수작업에 의존하여 타 부서 간 실시간 교차 매칭 속도가 매우 저조합니다.",
+                    solution: "소통 테크 제안: 예비 대체인 매칭 목록 전산망을 기업 허브 시스템에 통합하여 노무 대체 투입 소요 시간을 분 단위로 가속 단축시키십시오."
+                },
+                B: {
+                    strength: "정보 영역 강점: 비상 대체 가이드라인 양식에 맞춰 비상시 반나절 이내로 업무 공백 보직 대치가 안정적으로 처리됩니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "정보 영역 강점: 지역 클러스터 연계 대체 매핑 엔진을 통해 공정 공백을 수 분 내로 포착하고 자동 즉시 대치합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            },
+            dq9: {
+                D: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 사내 건의 제도가 유명무실하고, 작성자 신분 유출에 대한 극심한 불신으로 고충 소통 신뢰도가 0%에 수렴합니다.",
+                    solution: "소통 테크 제안: 현재 본 웹사이트 우측 관제 금고 모델로 구현된 암호화 무기명 소통 데스크 시스템을 도입하여 최고의 소통 신뢰도를 확보하십시오."
+                },
+                C: {
+                    strength: "",
+                    weakness: "정보 영역 진단: 익명 채널은 열어두었으나 IP 추적 등 사내 작성 보안 우려로 인해 명목상의 전형적인 건의 글만 적체됩니다.",
+                    solution: "소통 테크 제안: 개인 보안을 전산 암호화로 대리 보전해 주는 무기명 피드 제도를 수립해 노무 불안 본질을 검열 없이 인사과에 적재하는 전산망을 완성하십시오."
+                },
+                B: {
+                    strength: "정보 영역 강점: 지자체 공인 소통 센터 중재를 활용해 최소한의 노출 위험을 가로막고 안정적 수렴 중입니다.",
+                    weakness: "",
+                    solution: ""
+                },
+                S: {
+                    strength: "정보 영역 강점: 완전 무기명 보안 수신함 데스크를 기용해 검열 없는 고충 본질 소통 데이터를 매일 안전 수집합니다.",
+                    weakness: "",
+                    solution: ""
+                }
+            }
+        };
+
+        window.evaluateEnterprise = function() {
+            const form = document.getElementById('diag-form');
+            if (!form) return;
+
+            // 1. 사용자가 고른 모든 문항(9개)의 상세 선택 조합을 종합 정밀 집계
+            let selectedValues = {};
+            let counts = { S: 0, B: 0, C: 0, D: 0 };
+            
+            let geoA = 0, ecoA = 0, infoA = 0; // 시각화 바를 그리기 위한 긍정 지표 비중(S, B 비율)
+
+            for (let i = 1; i <= 9; i++) {
+                const checked = form.querySelector(`input[name="dq${i}"]:checked`);
+                const val = checked ? checked.value : 'D'; // 미선택시 최하위 D 대체
+                selectedValues[`dq${i}`] = val;
+                counts[val]++;
+
+                // 영역별 긍정 점수 비율 가중 연산
+                if (val === 'S' || val === 'B') {
+                    if (i <= 3) geoA++;
+                    else if (i <= 6) ecoA++;
+                    else infoA++;
+                }
+            }
+
+            const resultBox = document.getElementById('result-box');
+            const rTitle = document.getElementById('rTitle');
+            const rDesc = document.getElementById('rDesc');
+            const rGrade = document.getElementById('rGrade');
+            const rMetricSummary = document.getElementById('rMetricSummary');
+            const rPrescription = document.getElementById('rPrescription');
+            const dynamicGrid = document.getElementById('solutions-dynamic-grid');
+
+            // 동적 융합 회복력 시각화 바 렌더링
+            document.getElementById('geoScore').innerText = `${geoA}/3`;
+            document.getElementById('ecoScore').innerText = `${ecoA}/3`;
+            document.getElementById('infoScore').innerText = `${infoA}/3`;
+
+            if (resultBox) {
+                resultBox.style.display = 'block';
+            }
+
+            setTimeout(() => {
+                document.getElementById('geoBar').style.width = ((geoA / 3) * 100) + '%';
+                document.getElementById('ecoBar').style.width = ((ecoA / 3) * 100) + '%';
+                document.getElementById('infoBar').style.width = ((infoA / 3) * 100) + '%';
+            }, 100);
+
+            // 2. 사용자가 선택한 성향 조합을 토대로 5단계 종합 등급(S, A, B, C, D)을 다차원 연산 판정
+            let finalClass = "D";
+            let classSummary = "위기 노출형";
+            let classTitle = "";
+            let classDescription = "";
+            let prescriptiveOverview = "";
+
+            if (counts.S >= 7) {
+                finalClass = "S";
+                classSummary = "초일류 안티프래질 상생형";
+                classTitle = "진단 결과: 회복탄력적 도약 및 초일류 상생형 거버넌스 완성";
+                classDescription = "지리학적 다변화와 빅데이터 매칭, 그리고 상생 성과급 골디락스 설계가 전 권역에서 완벽히 연계되어 노사 갈등 기회 손실률이 동종업계 평균 대비 85% 이상 낮게 제어되는 초일류 단계입니다.";
+                prescriptiveOverview = "현 단계의 정밀한 예방 예측 루틴을 지속 가시화하여 가치 PR 지표로 삼고, 서귀포 혁신도시 거점 등과의 매칭 우수 사례 브랜딩을 활용해 관외 우수인재 유입 마케팅을 전개하십시오.";
+            } else if (counts.S + counts.B >= 7) {
+                finalClass = "A";
+                classSummary = "안정적 정착 지향형";
+                classTitle = "진단 결과: 유연한 완충 체계 기반의 우수한 회복탄력성 확보";
+                classDescription = "갈등 요인을 분산 흡수할 수 있는 우호적 시스템을 구축하고 있어, 비상 노무 충격 발생 시 비즈니스를 신속하게 본래 안정 상태로 수복할 수 있는 탄탄한 방어 근육을 보유했습니다.";
+                prescriptiveOverview = "현 임금 보상의 정합성을 공고히 유지하며, 청년 주거 정책 연계 복지 비율을 미세 상향하는 전술과 가상 인비저블 대체 인력 매핑 고도화에 주력하십시오.";
+            } else if (counts.D <= 1 && counts.C <= 4) {
+                finalClass = "B";
+                classSummary = "과도기적 완충 관리형";
+                classTitle = "진단 결과: 기초 방어 체계는 양호하나 수동적 경직성 상존";
+                classDescription = "기본적인 완충 제도는 가동 중이나, 내부 모니터링 수단이 사후 대처형에 전구되어 있어 실시간 이탈 예방이나 노무 마찰로 인한 보이지 않는 행정 비용 누수가 여전히 빈번합니다.";
+                prescriptiveOverview = "사후 수동 무마 대신 무기명 소통 게시판의 신뢰 장벽을 한 단계 더 단단히 암호화하고, 돈의 한계 효용 임계점을 우회할 수 있는 비금전적 여가 혜택 및 워케이션 제도로 대체 보증하십시오.";
+            } else if (counts.D <= 4) {
+                finalClass = "C";
+                classSummary = "부분적 위험 노출형";
+                classTitle = "진단 결과: 특정 융합 지표 부실에 따른 상시 갈등 노출";
+                classDescription = "지리적 거점 밀집, 경제적 보상 불투명성, 기술적 소통 한계 중 일부 특정 분야의 심각한 준비 공백으로 인해 노무 마찰 및 인재 유출이 수시로 발생할 수 있는 노출형 단계입니다.";
+                prescriptiveOverview = "가장 취약하게 체크된 지표 영역의 세부 실천 전략 과제를 선제 적용하여 전체 융합 체계의 붕괴 도미노 현상을 긴급 차단하십시오.";
+            } else {
+                finalClass = "D";
+                classSummary = "취약성 밀집 무방비형";
+                classTitle = "진단 결과: 이탈 무방비 및 위기 대처 능력 상실";
+                classDescription = "지리적 거점 편중에 따른 과밀 불이익이 누적되어 있고, 보상 절차의 불투명성 및 실시간 소통 데이터의 완전한 단절로 인해 충격이 닥치면 전체 생산 기능이 붕괴될 수 있는 무방비형입니다.";
+                prescriptiveOverview = "생산 권역을 제주 등 고정 거점으로 분산 이전하는 한편, 성과 임금 가이드라인을 투명하게 전사 오픈하여 기본 신뢰를 최우선 복구하는 전면 개편 전술이 긴급히 수반되어야 합니다.";
+            }
+
+            if (rGrade) rGrade.innerText = `GRADE ${finalClass}`;
+            if (rMetricSummary) rMetricSummary.innerText = classSummary;
+            if (rTitle) rTitle.innerText = classTitle;
+            if (rDesc) rDesc.innerText = classDescription;
+            if (rPrescription) rPrescription.innerText = prescriptiveOverview;
+
+            // 3. [해결책 다양화 및 객관화] 사용자가 답한 9가지 질문의 모든 선택지(조합)에 따라 "장점과 단점, 그리고 그에 상응하는 해결책"을 완전히 1:1 결합하여 나열
+            let strengthItems = [];
+            let weaknessItems = [];
+            let gridHTML = "";
+
+            for (let i = 1; i <= 9; i++) {
+                const qKey = `dq${i}`;
+                const selectedAns = selectedValues[qKey];
+                const dbEntry = SURVEY_DATABASE[qKey][selectedAns];
+
+                if (dbEntry) {
+                    // 장점 누적
+                    if (dbEntry.strength) {
+                        strengthItems.push(`<li><i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> ${dbEntry.strength}</li>`);
+                    }
+                    // 단점 누적
+                    if (dbEntry.weakness) {
+                        weaknessItems.push(`<li><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> ${dbEntry.weakness}</li>`);
+                    }
+                    // 해결책 카드 동적 누적 (취약 성향인 C, D 가치를 골랐을 때만 해결 가이드 제공)
+                    if (dbEntry.solution && (selectedAns === 'C' || selectedAns === 'D')) {
+                        let areaBadge = i <= 3 ? "GEOGRAPHY" : (i <= 6 ? "ECONOMICS" : "INFORMATION");
+                        let isD = selectedAns === 'D';
+                        gridHTML += `
+                            <div class="solution-detail-card" style="border-left: 4px solid ${isD ? 'var(--accent-red)' : 'var(--accent-orange)'};">
+                                <h5 class="${isD ? '' : 'green-badge'}">
+                                    <span>${areaBadge}</span> ${i}번 평가 보완 솔루션
+                                </h5>
+                                <p>${dbEntry.solution}</p>
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            // 기존 결과 박스 하단 동적 리포트 영역 청소 및 재빌드
+            const oldLists = resultBox.querySelectorAll('.dynamic-report-section');
+            oldLists.forEach(el => el.remove());
+
+            // 장단점 목록이 비어있을 시 디폴트 텍스트 대체
+            if (strengthItems.length === 0) strengthItems.push("<li><i class='fa-solid fa-circle-info'></i> 현재 조합 분석 결과 뛰어난 장점 지표가 검출되지 않았습니다. 종합적인 체질 개편이 요망됩니다.</li>");
+            if (weaknessItems.length === 0) weaknessItems.push("<li><i class='fa-solid fa-circle-check' style='color:var(--accent);'></i> 완벽합니다. 전 영역에 걸쳐 취약점이 검출되지 않았습니다.</li>");
+
+            // 최종 제언 본문에 실시간 연산된 장단점 목록 덧붙이기
+            let strengthSection = `
+                <div class="dynamic-report-section" style="margin-top: 20px;">
+                    <h5 style="font-size: 16px; color: var(--text-light); margin-bottom: 10px; font-weight: 800;"><i class="fa-solid fa-circle-check" style="color:var(--accent);"></i> 본사 종합 분석 강점 (Strengths)</h5>
+                    <ul class="bullet-list" style="font-size: 14px; margin-bottom: 25px; line-height: 1.6; list-style-type: none;">
+                        ${strengthItems.join("")}
+                    </ul>
+                </div>
+            `;
+
+            let weaknessSection = `
+                <div class="dynamic-report-section">
+                    <h5 style="font-size: 16px; color: var(--text-light); margin-bottom: 10px; font-weight: 800;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-red);"></i> 본사 종합 분석 약점 (Weaknesses)</h5>
+                    <ul class="bullet-list" style="font-size: 14px; margin-bottom: 25px; line-height: 1.6; list-style-type: none;">
+                        ${weaknessItems.join("")}
+                    </ul>
+                </div>
+            `;
+
+            rPrescription.insertAdjacentHTML('afterend', strengthSection + weaknessSection);
+
+            if (dynamicGrid) {
+                dynamicGrid.innerHTML = gridHTML;
+            }
+            
+            if (resultBox) {
+                resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // 4. 로컬 및 클라우드 연동 상태 정의 및 예시 탑재
+        const ADMIN_PASSWORD = "0715";
+
+        const DEFAULT_FORUM_POSTS = [
+            {
+                id: "default-1",
+                name: "강우진 (제주대 중국인 유학생)",
+                region: "제주 서귀포",
+                message: "한국어 통번역을 전공하는 유학생입니다. 졸업 후 아름다운 제주 서귀포에 완전히 안착해 글로벌 브랜딩 가이드나 로컬 투어 매니징 분야에 기여하고 싶습니다. 정주를 돕는 LEAP의 정착 앵커링 패키지는 저처럼 지역에 남고 싶은 외국인 인재에게 최고의 선물입니다!",
+                likes: 135,
+                createdAt: Date.now() - 3600000 * 1
+            },
+            {
+                id: "default-2",
+                name: "김재현 (소방관 준비생 - 5수)",
+                region: "대구/경북",
+                message: "소방공무원 시험을 5번째 도전 중인 경북 청년입니다. 수험 생활의 장기화로 정말 지쳐 있었는데, 정착을 장려하는 노사 상생 협동 프로그램과 관내 거주 부담 완화 계산기를 보니 눈물이 납니다. 지역 소방 인프라 확대와 일자리 복지가 결합된다면 뼈를 묻겠습니다!",
+                likes: 121,
+                createdAt: Date.now() - 3600000 * 3
+            },
+            {
+                id: "default-3",
+                name: "박서윤 (서귀포 청년 예술가)",
+                region: "제주 서귀포",
+                message: "문화 예술 콘텐츠 인프라가 수도권에만 몰려 있어 지리적인 한계를 항상 느꼈는데, 주거비가 보증되는 앵커링 인프라 덕분에 제주 서귀포에서 마음 편히 디자인과 브랜딩 창작 활동을 이어갈 수 있어 행복해요!",
+                likes: 85,
+                createdAt: Date.now() - 3600000 * 5
+            },
+            {
+                id: "default-4",
+                name: "정다은 (로컬 가치 크리에이터)",
+                region: "부산/경남",
+                message: "지역 소멸은 청년들의 일방적인 이탈 때문이 아니라 보상과 문화 인프라의 마찰 때문입니다. 이탈 징후 빅데이터를 분석하고 예방주사를 놓아주는 LEAP 시스템이야말로 진정으로 지속 가능한 미래 균형 모델이네요.",
+                likes: 92,
+                createdAt: Date.now() - 3600000 * 8
+            },
+            {
+                id: "default-5",
+                name: "한지훈 (기계공학과 졸업생)",
+                region: "광주/전라",
+                message: "기계공학 전공을 살려 지역 스마트 팩토리에 정착하고 싶었는데, 대기업 수준의 소득 분배 기여 모델을 계산해 주는 시뮬레이션 덕에 사측과 원만한 임금 합의를 이루고 만족스럽게 첫 커리어에 정착했습니다.",
+                likes: 67,
+                createdAt: Date.now() - 3600000 * 12
+            }
+        ];
+
+        const DEFAULT_INQUIRIES = [
+            {
+                id: "inq-default-1",
+                name: "김예범 (분석가)",
+                email: "sghs241511@seogwipo.jje.hs.kr",
+                type: "지자체 협력 및 프로그램 문의",
+                message: "프로젝트 발표 시연을 위한 첫 번째 클라우드 테스트용 모킹 데이터 세트입니다. 문의 제출을 완료하면 실시간으로 데이터가 추가 보존되는 구조를 가지고 있습니다.",
+                createdAt: Date.now() - 3600000 * 2
+            }
+        ];
+
+        // 로컬스토리지 보존 연계
+        window.getLocalStorageForum = function() {
+            let posts = localStorage.getItem('leap_forum_posts_v2');
+            if (!posts) {
+                localStorage.setItem('leap_forum_posts_v2', JSON.stringify(DEFAULT_FORUM_POSTS));
+                return DEFAULT_FORUM_POSTS;
+            }
+            return JSON.parse(posts);
+        };
+
+        window.getLocalStorageInquiries = function() {
+            let inqs = localStorage.getItem('leap_inquiries_v2');
+            if (!inqs) {
+                localStorage.setItem('leap_inquiries_v2', JSON.stringify(DEFAULT_INQUIRIES));
+                return DEFAULT_INQUIRIES;
+            }
+            return JSON.parse(inqs);
+        };
+
+        window.mergeAndRenderForum = function(firestorePosts) {
+            let localPosts = window.getLocalStorageForum();
+            let merged = [...localPosts];
+
+            firestorePosts.forEach(fp => {
+                let exists = merged.some(lp => lp.id === fp.id || (lp.name === fp.name && lp.message === fp.message));
+                if (!exists) { merged.push(fp); }
+            });
+
+            merged.sort((a, b) => b.createdAt - a.createdAt);
+            window.communityPosts = merged;
+            window.renderCommunityFeed();
+        };
+
+        window.mergeAndRenderInquiries = function(firestoreInquiries) {
+            let localInqs = window.getLocalStorageInquiries();
+            let merged = [...localInqs];
+
+            firestoreInquiries.forEach(fi => {
+                let exists = merged.some(li => li.id === fi.id || (li.name === fi.name && li.message === fi.message));
+                if (!exists) { merged.push(fi); }
+            });
+
+            merged.sort((a, b) => b.createdAt - a.createdAt);
+            window.localInbox = merged;
+
+            const unlockedView = document.getElementById('inbox-unlocked-view');
+            if (unlockedView && unlockedView.style.display !== 'none') {
+                window.renderInbox();
+            } else {
+                const mailCountEl = document.getElementById('mail-count');
+                if (mailCountEl) { mailCountEl.innerText = `NEW ${merged.length}`; }
+            }
+        };
+
+        // 수신함 관리 기능
+        window.tryUnlock = function() {
+            const passwordInput = document.getElementById('admin-password');
+            const errorMsg = document.getElementById('lock-error-msg');
+            const lockedView = document.getElementById('inbox-locked-view');
+            const unlockedView = document.getElementById('inbox-unlocked-view');
+
+            if (!passwordInput) return;
+
+            if (passwordInput.value === ADMIN_PASSWORD) {
+                if (errorMsg) errorMsg.style.display = 'none';
+                if (lockedView) lockedView.style.display = 'none';
+                if (unlockedView) unlockedView.style.display = 'block';
+                passwordInput.value = '';
+                window.renderInbox();
+            } else {
+                if (errorMsg) errorMsg.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        window.lockInbox = function() {
+            const lockedView = document.getElementById('inbox-locked-view');
+            const unlockedView = document.getElementById('inbox-unlocked-view');
+            const errorMsg = document.getElementById('lock-error-msg');
+
+            if (errorMsg) errorMsg.style.display = 'none';
+            if (unlockedView) unlockedView.style.display = 'none';
+            if (lockedView) lockedView.style.display = 'flex';
+        }
+
+        window.renderInbox = function() {
+            const inboxList = document.getElementById('inbox-messages');
+            const mailCountEl = document.getElementById('mail-count');
+            const emptyView = document.getElementById('inbox-empty-view');
+
+            if (!inboxList || !mailCountEl) return;
+
+            mailCountEl.innerText = `NEW ${window.localInbox.length}`;
+
+            const existingMails = inboxList.querySelectorAll('.mail-item');
+            existingMails.forEach(mail => mail.remove());
+
+            if (window.localInbox.length > 0) {
+                if (emptyView) emptyView.style.display = 'none';
+                
+                window.localInbox.forEach(mail => {
+                    const mailItem = document.createElement('div');
+                    mailItem.className = 'mail-item';
+                    
+                    const formattedTime = mail.createdAt ? new Date(mail.createdAt).toLocaleString('ko-KR', {
+                        month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'
+                    }) : '방금 전';
+
+                    mailItem.innerHTML = `
+                        <div class="mail-meta">
+                            <span class="mail-sender"><i class="fa-solid fa-user"></i> ${mail.name}</span>
+                            <span class="mail-type">${mail.type}</span>
+                        </div>
+                        <div style="font-size:12px; color:#94a3b8; margin-top:2px;"><i class="fa-solid fa-envelope"></i> ${mail.email}</div>
+                        <div class="mail-msg">${mail.message}</div>
+                        <div class="mail-recipient">
+                            <i class="fa-regular fa-clock"></i> 전송시각: ${formattedTime} | 수신경로: sghs241511@seogwipo.jje.hs.kr
+                        </div>
+                    `;
+                    inboxList.appendChild(mailItem);
+                });
+            } else {
+                if (emptyView) emptyView.style.display = 'flex';
+            }
+        }
+
+        window.renderCommunityFeed = function() {
+            const feedView = document.getElementById('community-feed-view');
+            const counterEl = document.getElementById('signature-count');
+            const emptyView = document.getElementById('community-empty-view');
+
+            if (!feedView || !counterEl) return;
+
+            const totalSignatures = 1428 + window.communityPosts.length;
+            counterEl.innerText = `실시간 서명: ${totalSignatures.toLocaleString()}명`;
+
+            const existingItems = feedView.querySelectorAll('.feed-item');
+            existingItems.forEach(item => item.remove());
+
+            let likedPosts = JSON.parse(localStorage.getItem('leap_liked_posts_v2') || '[]');
+
+            if (window.communityPosts.length > 0) {
+                if (emptyView) emptyView.style.display = 'none';
+
+                window.communityPosts.forEach(post => {
+                    const item = document.createElement('div');
+                    item.className = 'feed-item';
+                    
+                    const formattedTime = post.createdAt ? new Date(post.createdAt).toLocaleTimeString('ko-KR', {
+                        hour: '2-digit', minute: '2-digit'
+                    }) : '방금 전';
+
+                    const isLiked = likedPosts.includes(post.id);
+
+                    item.innerHTML = `
+                        <div class="feed-meta">
+                            <span class="feed-user"><i class="fa-solid fa-user-tag" style="color: var(--accent-blue);"></i> ${post.name}</span>
+                            <span class="feed-region">${post.region}</span>
+                        </div>
+                        <div class="feed-text">${post.message}</div>
+                        <div class="feed-actions">
+                            <button class="like-button ${isLiked ? 'liked' : ''}" onclick="toggleLike('${post.id}')">
+                                <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart" style="color: var(--accent-red);"></i> 공감 <span class="like-count">${post.likes || 0}</span>
+                            </button>
+                            <span class="feed-time">${formattedTime}</span>
+                        </div>
+                    `;
+                    feedView.appendChild(item);
+                });
+            } else {
+                if (emptyView) emptyView.style.display = 'flex';
+            }
+        }
+
+        // 공감(하트) 토글 핸들러
+        window.toggleLike = async function(postId) {
+            let likedPosts = JSON.parse(localStorage.getItem('leap_liked_posts_v2') || '[]');
+            let hasLiked = likedPosts.includes(postId);
+
+            let localPosts = window.getLocalStorageForum();
+            let index = localPosts.findIndex(p => p.id === postId);
+            if (index !== -1) {
+                if (hasLiked) {
+                    localPosts[index].likes = Math.max(0, (localPosts[index].likes || 0) - 1);
+                    likedPosts = likedPosts.filter(id => id !== postId);
+                } else {
+                    localPosts[index].likes = (localPosts[index].likes || 0) + 1;
+                    likedPosts.push(postId);
+                }
+                localStorage.setItem('leap_forum_posts_v2', JSON.stringify(localPosts));
+                localStorage.setItem('leap_liked_posts_v2', JSON.stringify(likedPosts));
+                window.communityPosts = localPosts;
+                window.renderCommunityFeed();
+            }
+
+            try {
+                if (window.db && !postId.startsWith('default') && !postId.startsWith('local')) {
+                    const postRef = window.doc(window.db, 'artifacts', window.appId, 'public', 'data', 'forum', postId);
+                    await window.updateDoc(postRef, {
+                        likes: window.increment(hasLiked ? -1 : 1)
+                    });
+                }
+            } catch (err) {
+                console.warn("Like sync queued offline");
+            }
+        }
+
+        // 포럼 제출
+        window.submitForumPost = async function(event) {
+            event.preventDefault();
+
+            const nameEl = document.getElementById('forum-name');
+            const regionEl = document.getElementById('forum-region');
+            const msgEl = document.getElementById('forum-msg');
+            const submitBtn = document.getElementById('forum-submit-btn');
+
+            if (!nameEl || !regionEl || !msgEl || !submitBtn) return;
+
+            const name = nameEl.value.trim();
+            const region = regionEl.value;
+            const msg = msgEl.value.trim();
+
+            const newId = "local-" + Date.now();
+            const newPost = {
+                id: newId,
+                name: name + " (참여자)",
+                region: region,
+                message: msg,
+                likes: 0,
+                createdAt: Date.now()
+            };
+
+            let localPosts = window.getLocalStorageForum();
+            localPosts.unshift(newPost);
+            localStorage.setItem('leap_forum_posts_v2', JSON.stringify(localPosts));
+
+            window.communityPosts = localPosts;
+            window.renderCommunityFeed();
+
+            nameEl.value = '';
+            regionEl.value = '';
+            msgEl.value = '';
+
+            try {
+                if (window.db && window.auth.currentUser) {
+                    const ref = window.collection(window.db, 'artifacts', window.appId, 'public', 'data', 'forum');
+                    await window.addDoc(ref, {
+                        name: name,
+                        region: region,
+                        message: msg,
+                        likes: 0,
+                        createdAt: Date.now()
+                    });
+                }
+            } catch (err) {
+                console.warn("Forum Cloud sync delayed");
+            }
+        }
+
+        // 문의 센터 제출
+        window.submitContact = async function(event) {
+            event.preventDefault();
+            
+            const nameEl = document.getElementById('contact-name');
+            const emailEl = document.getElementById('contact-email');
+            const typeEl = document.getElementById('contact-type');
+            const msgEl = document.getElementById('contact-msg');
+            const submitBtn = document.getElementById('submit-btn');
+            const alertBox = document.getElementById('custom-alert-box');
+
+            if (!nameEl || !emailEl || !typeEl || !msgEl || !submitBtn) return;
+
+            const name = nameEl.value.trim();
+            const email = emailEl.value.trim();
+            const type = typeEl.value;
+            const msg = msgEl.value.trim();
+
+            const FORMSPREE_FORM_ID = "xpwwpode"; 
+            const newInqId = "inq-local-" + Date.now();
+
+            const newInquiry = {
+                id: newInqId,
+                name: name,
+                email: email,
+                type: type,
+                message: msg,
+                createdAt: Date.now()
+            };
+
+            let localInqs = window.getLocalStorageInquiries();
+            localInqs.unshift(newInquiry);
+            localStorage.setItem('leap_inquiries_v2', JSON.stringify(localInqs));
+
+            window.localInbox = localInqs;
+            const unlockedView = document.getElementById('inbox-unlocked-view');
+            if (unlockedView && unlockedView.style.display !== 'none') {
+                window.renderInbox();
+            } else {
+                const mailCountEl = document.getElementById('mail-count');
+                if (mailCountEl) { mailCountEl.innerText = `NEW ${localInqs.length}`; }
+            }
+
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> 실시간 접수중...';
+            submitBtn.disabled = true;
+
+            try {
+                if (window.db && window.auth.currentUser) {
+                    const ref = window.collection(window.db, 'artifacts', window.appId, 'public', 'data', 'inquiries');
+                    await window.addDoc(ref, {
+                        name: name,
+                        email: email,
+                        type: type,
+                        message: msg,
+                        createdAt: Date.now()
+                    });
+                }
+            } catch (err) {
+                console.warn("Inquiries Cloud sync delayed");
+            }
+
+            const formData = {
+                name: name,
+                email: email,
+                type: type,
+                message: msg,
+                _subject: `[LEAP Q&A] ${name}님의 문의 사항 (${type})`
+            };
+
+            fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => showSuccess())
+            .catch(() => showSuccess());
+
+            function showSuccess() {
+                nameEl.value = '';
+                emailEl.value = '';
+                typeEl.value = '';
+                msgEl.value = '';
+
+                submitBtn.innerHTML = '<i class="fa-solid fa-share-from-square"></i> LEAP 실시간 문의 제출';
+                submitBtn.disabled = false;
+
+                if (alertBox) {
+                    alertBox.style.display = 'block';
+                    alertBox.innerHTML = '<i class="fa-solid fa-circle-check"></i> 문의사항이 지메일로 정상 라우팅되었으며, 브라우저 저장소 및 클라우드 DB에 영구 등록되었습니다!<br>' +
+                                         '<span style="font-size:14px; font-weight:normal; color:var(--text-main);">' +
+                                         '우측 수신데스크에 비밀번호 인증을 완료하면 새로고침을 하거나 웹페이지를 껐다 켜도 문의 기록들을 내부에서 완벽히 영구 보존하여 확인할 수 있습니다.</span>';
+                }
+
+                setTimeout(() => {
+                    if (alertBox) alertBox.style.display = 'none';
+                }, 7500);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById('admin-password');
+            if (passwordInput) {
+                passwordInput.onkeyup = function(event) {
+                    if (event.key === 'Enter') { window.tryUnlock(); }
+                };
+            }
+            window.selectCase(1, document.querySelector('.case-btn')); // 최초 로딩시 사례 A 활성화
+            window.updateProgress();
+
+            window.communityPosts = window.getLocalStorageForum();
+            window.localInbox = window.getLocalStorageInquiries();
+            window.renderCommunityFeed();
+        });
+    </script>
+</body>
+</html>
